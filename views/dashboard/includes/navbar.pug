@@ -1,0 +1,56 @@
+nav#mainNav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+  a.navbar-brand(href='index.html') NKAN
+  button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarResponsive.collapse.navbar-collapse
+    ul#exampleAccordion.navbar-nav.navbar-sidenav
+      li.nav-item(data-toggle='tooltip', data-placement='right', title='Dashboard')
+        a.nav-link(href='index.html')
+          i.fa.fa-fw.fa-dashboard
+          span.nav-link-text
+            | Dashboard
+      li.nav-item(data-toggle='tooltip', data-placement='right', title='Data Sets')
+        a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseDatasets', data-parent='#exampleAccordion')
+          i.fa.fa-fw.fa-wrench
+          span.nav-link-text
+            | Data Sets
+        ul#collapseDatasets.sidenav-second-level.collapse
+          li
+            a(href='navbar.html') All data sets
+          li
+            a(href='cards.html') New
+      li.nav-item(data-toggle='tooltip', data-placement='right', title='Components')
+        a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseComponents', data-parent='#exampleAccordion')
+          i.fa.fa-fw.fa-wrench
+          span.nav-link-text
+            | Category
+        ul#collapseComponents.sidenav-second-level.collapse
+          li
+            a(href='navbar.html') All categories
+          li
+            a(href='cards.html') New
+
+      li.nav-item(data-toggle='tooltip', data-placement='right', title='Example Pages')
+        a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseExamplePages', data-parent='#exampleAccordion')
+          i.fa.fa-fw.fa-file
+          span.nav-link-text
+            | Pages
+        ul#collapseExamplePages.sidenav-second-level.collapse
+          li
+            a(href='') All pages
+          li
+            a(href='') New
+      li.nav-item(data-toggle='tooltip', data-placement='right', title='Link')
+        a.nav-link(href='#')
+          i.fa.fa-fw.fa-link
+          span.nav-link-text
+            | Settings
+    ul.navbar-nav.sidenav-toggler
+      li.nav-item
+        a#sidenavToggler.nav-link.text-center
+          i.fa.fa-fw.fa-angle-left
+    ul.navbar-nav.ml-auto
+      li.nav-item
+        a.nav-link
+          i.fa.fa-fw.fa-sign-out
+          | Logout

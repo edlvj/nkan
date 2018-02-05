@@ -1,0 +1,23 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(name='description', content='')
+    meta(name='author', content='')
+
+    title Nkan
+
+    link(href='css/bootstrap.min.css', rel='stylesheet')
+    link(href='css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    link(href='stylesheets/sb-admin.css', rel='stylesheet')
+
+  body#page-top.fixed-nav.sticky-footer.bg-dark
+    include includes/navbar.pug
+    .content-wrapper
+      .container-fluid
+        block content
+      include includes/footer.pug
+  script(src='jquery.min.js')
+  script(src='js/bootstrap.min.js')
