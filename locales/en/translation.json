@@ -1,0 +1,13 @@
+{
+    "dashboard": {
+        "name": "i18nextTest",
+        "sampleText": "This is localized text."
+    },
+    "auth": {
+      "logout": "Logout"
+    },
+    "app": {
+      "search": "Search",
+      "category": "Category"
+    }
+}

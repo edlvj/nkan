@@ -7,17 +7,17 @@ html(lang='en')
     meta(name='description', content='')
     meta(name='author', content='')
 
-    title Nkan
+    title Nkan Panel
 
-    link(href='css/bootstrap.min.css', rel='stylesheet')
-    link(href='css/font-awesome.min.css', rel='stylesheet', type='text/css')
-    link(href='stylesheets/sb-admin.css', rel='stylesheet')
+    link(href='/css/bootstrap.min.css', rel='stylesheet')
+    link(href='/css/font-awesome.min.css', rel='stylesheet', type='text/css')
+    link(href='/stylesheets/sb-admin.css', rel='stylesheet')
 
   body#page-top.fixed-nav.sticky-footer.bg-dark
-    include includes/navbar.pug
+    include ./navbar.pug
     .content-wrapper
       .container-fluid
         block content
-      include includes/footer.pug
-  script(src='jquery.min.js')
-  script(src='js/bootstrap.min.js')
+      include ./footer.pug
+  script(src='/jquery.min.js')
+  script(src='/js/bootstrap.min.js')

@@ -1,9 +1,10 @@
 module.exports = {
   site_name: "Nkan",
   keywords: "open data cms",
-  db: "mongodb://127.0.0.1/qtdui",
+  db: "mongodb://127.0.0.1/nkan",
   admin: {
     username: 'admin',
-    password: '123456tb'
-  }
+    password: 'password'
+  },
+  template: 'basic'
 }

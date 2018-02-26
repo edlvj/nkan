@@ -11,30 +11,40 @@ nav#mainNav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
             | Dashboard
       li.nav-item(data-toggle='tooltip', data-placement='right', title='Data Sets')
         a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseDatasets', data-parent='#exampleAccordion')
-          i.fa.fa-fw.fa-wrench
+          i.fa.fa-fw.fa-table
           span.nav-link-text
             | Data Sets
         ul#collapseDatasets.sidenav-second-level.collapse
           li
-            a(href='navbar.html') All data sets
+            a(href='/dashboard/dataset') All data sets
           li
-            a(href='cards.html') New
+            a(href='/dashboard/dataset/new') New
       li.nav-item(data-toggle='tooltip', data-placement='right', title='Components')
         a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseComponents', data-parent='#exampleAccordion')
-          i.fa.fa-fw.fa-wrench
+          i.fa.fa-fw.fa-folder
           span.nav-link-text
             | Category
         ul#collapseComponents.sidenav-second-level.collapse
           li
-            a(href='navbar.html') All categories
+            a(href='/dashboard/category') All categories
           li
-            a(href='cards.html') New
+            a(href='/dashboard/category/new') New
 
       li.nav-item(data-toggle='tooltip', data-placement='right', title='Example Pages')
         a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseExamplePages', data-parent='#exampleAccordion')
           i.fa.fa-fw.fa-file
           span.nav-link-text
             | Pages
+        ul#collapseExamplePages.sidenav-second-level.collapse
+          li
+            a(href='') All pages
+          li
+            a(href='') New
+      li.nav-item(data-toggle='tooltip', data-placement='right', title='Example Pages')
+        a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseExamplePages', data-parent='#exampleAccordion')
+          i.fa.fa-fw.fa-users
+          span.nav-link-text
+            | Users
         ul#collapseExamplePages.sidenav-second-level.collapse
           li
             a(href='') All pages
@@ -53,4 +63,4 @@ nav#mainNav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
       li.nav-item
         a.nav-link
           i.fa.fa-fw.fa-sign-out
-          | Logout
+          = t('auth.logout')
