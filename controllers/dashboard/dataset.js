@@ -4,7 +4,7 @@ exports.index = function(req, res, next) {
 }
 
 exports.new = function(req, res, next) {
-   res.render('dashboard/dataset/');
+  res.render('dashboard/dataset/new');
 }
 
 exports.create = function(req, res, next) {

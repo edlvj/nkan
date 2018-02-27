@@ -1,0 +1,18 @@
+include ./header.pug
+
+block content
+  body.bg-dark
+    .container
+      .card.card-login.mx-auto.mt-5
+        .card-header
+          | Login
+        .card-body
+          form(role='form', action="/dashboard/login", method="post")
+            .form-group
+              label(for='inputEmail') Email 
+              input#inputEmail.form-control(name='email', type='email', placeholder='Enter email')
+            .form-group
+              label(for='inputPassword') Password
+              input#inputPassword.form-control(name='password', type='password', placeholder='Password')
+            button.btn.btn-primary.btn-block(type="submit") Login 
+include ./assets

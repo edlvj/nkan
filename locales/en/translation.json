@@ -4,6 +4,7 @@
         "sampleText": "This is localized text."
     },
     "auth": {
+      "login": "Вхід",
       "logout": "Logout"
     },
     "app": {
