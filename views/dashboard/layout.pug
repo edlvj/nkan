@@ -1,8 +1,19 @@
-include ./header.pug
-body#page-top.fixed-nav.sticky-footer.bg-dark
+doctype html
+html
+  include ./header.pug
+  block title
+    title Nkan Panel
+
+  block head_scripts
+    include ./_header.pug
+  
+  body#page-top.fixed-nav.sticky-footer.bg-dark
   include ./navbar.pug
   .content-wrapper
     .container-fluid
+      include ./_flash.pug
       block content
     include ./footer.pug
-include ./assets
+  
+  block footer_scripts
+    include ./_footer.pug

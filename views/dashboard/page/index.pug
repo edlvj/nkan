@@ -1,6 +1,6 @@
 extends ../layout
 block title
-  title Categories
+  title Pages
 
 block head_scripts
   include ./../_header.pug
@@ -10,27 +10,25 @@ block content
   .card.mb-3
     .card-header
       i.fa.fa-table
-      | Categories
+      | Pages
     .card-body
       .table-responsive
         table#dataTable.table.table-bordered(width='100%', cellspacing='0')
           thead
             tr
               th Title
-              th Url
               th Manage
           tbody
-            each category in categories
+            each page in pages
               tr
-                td= category.title
-                td= category.url
-                td
-                  a(href='/dashboard/category/' + category.id + '/edit') Edit 
+                td= page.title
+                td 
+                  a(href='/dashboard/page/' + page.id + '/edit') Edit 
                   span |
-                  a(href='/dashboard/category/' + category.id + '/delete')  Delete
+                  a(href='/dashboard/page/' + page.id + '/delete')  Delete 
 
 block footer_scripts
   include ./../_footer.pug
   script(src='/js/jquery.dataTables.js')
   script(src='/js/dataTables.bootstrap4.js')
-  script(src='/js/sb-admin-datatables.min.js')                   
+  script(src='/js/sb-admin-datatables.min.js')

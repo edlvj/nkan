@@ -5,10 +5,14 @@ var user = require('../../models/user');
 var dashboard = require('../../controllers/dashboard');
 var category = require('../../controllers/dashboard/category');
 var user = require('../../controllers/dashboard/user');
+var page = require('../../controllers/dashboard/page');
 
 var router = express.Router();
 
 router.get('/', dashboard.index);
+
+router.get('/pages', page.index);
+router.get('/page/new', page.new);
 
 router.get('/categories', category.index);
 router.get('/category/new', category.new);

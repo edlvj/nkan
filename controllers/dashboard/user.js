@@ -1,42 +1,71 @@
 var User = require('../../models/user');
 
 exports.index = function(req, res, next) {
-  res.render('dashboard/user/');
-}
-
-exports.create = function(req, res, next) {
-  console.log(req.body);
-  req.flash('warning', 'That email is already taken.');
-  res.redirect('/dashboard/users');
-
-  // process.nextTick(function() {
-  //   User.findOne({ 'email':  req.body.email }, function(err, user) {
-  //     if (err)
-  //       throw err;
-
-  //     if (user) {
-  //       req.flash('warning', 'That email is already taken.');
-  //     } else {
-  //       var newUser = new User();
-
-  //       console.log(newUser);
-
-  //       newUser.email    = req.body.email;
-  //       newUser.password = newUser.generateHash(req.body.password);
-  //       newUser.admin = req.body.admin; 
-
-  //       newUser.save(function(err) {
-  //         if (err)
-  //           throw err;
-          
-  //         req.flash('success', 'User successfully added.');
-  //       });
-  //     } 
-  //     res.redirect('/dashboard/users');
-  //   });
-  // });     
+  User.findAll()
+    .then(function(users) {
+      res.render('dashboard/user', {
+        users: users
+      });
+    });
 }
 
 exports.new = function(req, res, next) {
-  res.render('dashboard/user/new');
+  res.render('dashboard/user/form');
+}
+
+exports.create = function(req, res, next) { 
+  User.create({
+    title: title,
+    contents: contents,
+    url: url,
+    category: category,
+    keywords: keywords
+  }).then(function(p) {
+    req.flash('success', 'User added.');
+    res.redirect('/dashboard/users');
+  }).catch(function(err) {
+    if (err) {
+      req.flash('warning', 'Something went wrong.');
+      res.redirect('/dashboard/users');
+    }
+  });   
+}
+
+exports.edit = function(req, res, next) {
+  User.findOneById(id).then(function(p) {
+    res.render('/dashboard/users/form', {});
+  }).catch(function(err) {
+    if (err) {
+      res.send(404);
+    }
+  }); 
+}
+
+exports.update = function(req, res, next) {
+  User.updateById(req.params.id, {
+    email: req.body.email,
+    password: this.generateHash(req.body.password),
+    admin: req.body.admin,
+  }).then(function(p) {
+    req.flash('success', 'User updated.');
+    res.redirect('back');
+  }).catch(function(err) {
+    if (err) {
+      req.flash('warning', 'Something went wrong.');
+      res.redirect('back');
+    }
+  });
+}
+
+exports.destroy = function(req, res, next) {
+  User.destroyById(req.params.id)
+    .then(function() {
+      req.flash('success', 'User destroyed.');
+      res.redirect('/dashboard/users');
+    }).catch(function(err) {
+    if (err) {
+      req.flash('warning', 'Something went wrong.');
+      res.redirect('back');
+    }
+  });
 }

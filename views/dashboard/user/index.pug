@@ -1,19 +1,36 @@
 extends ../layout
+block title
+  title Users
+
+block head_scripts
+  include ./../_header.pug
+  link(href='/css/dataTables.bootstrap4.css', rel='stylesheet')  
 
 block content
   .card.mb-3
     .card-header
       i.fa.fa-table
-      |  Data Table Example
+      |  Users
     .card-body
       .table-responsive
         table#dataTable.table.table-bordered(width='100%', cellspacing='0')
           thead
             tr
-              th Name
-              th Position
-              th Office
-              th Age
-              th Start date
-              th Salary
-          tfoot
+              th Email
+              th Admin
+              th Manage
+          tbody
+            each user in users
+              tr
+                td= user.email
+                td= user.admin
+                td 
+                  a(href='/dashboard/user/' + user.id + '/edit') Edit 
+                  span |
+                  a(href='/dashboard/user/' + user.id + '/delete')  Delete 
+
+block footer_scripts
+  include ./../_footer.pug
+  script(src='/js/jquery.dataTables.js')
+  script(src='/js/dataTables.bootstrap4.js')
+  script(src='/js/sb-admin-datatables.min.js')

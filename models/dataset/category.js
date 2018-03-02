@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-
 var Schema = mongoose.Schema;
 
 var CategorySchema = new Schema({
@@ -11,6 +10,9 @@ var CategorySchema = new Schema({
     type: String,
     unique: true
   }
+},
+{
+  timestamps: true
 });
 
 CategorySchema.statics.createOne = function(category) {

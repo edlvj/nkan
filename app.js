@@ -51,8 +51,6 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-//User.authenticate()
-
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password'
@@ -77,31 +75,32 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname ,'/node_modules/jquery/dist')));
 app.use(express.static(path.join(__dirname ,'/node_modules/bootstrap/dist')));
 app.use(express.static(path.join(__dirname ,'/node_modules/font-awesome')));
+app.use(express.static(path.join(__dirname ,'/node_modules/datatables.net')));
+app.use(express.static(path.join(__dirname ,'/node_modules/datatables.net-bs4')));
 
 app.use(i18n.handle);
 i18n.registerAppHelper(app);
+
+app.use(function(req, res, next){
+  res.locals.warning = req.flash('warning');
+  res.locals.success = req.flash('success');
+  next();
+});
 
 app.use('/', indexRoute);
 app.use('/dashboard', ensureLogined, dashboardRoute);
 
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  res.status = 404;
+  res.render('404');
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-  
-  res.status(err.status);
-
-  if(err.status == 404) {
-    res.render('404');
-  }
-
-  res.render('500');
+app.use(function(err, req, res, next) {  
+  res.status(err.status || 500);
+  res.render('500', {
+    message: err.message,
+    error: {}
+  });
 });
 
 module.exports = app;

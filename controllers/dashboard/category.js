@@ -10,24 +10,32 @@ exports.index = function(req, res, next) {
 }
 
 exports.new = function(req, res, next) {
-  res.render('dashboard/category/new')
+  res.render('dashboard/category/form')
 }
 
 exports.create = function(req, res, next) {
-  var name = req.body.name;
-  var url  = req.body.url;
-
   Category.create({
-    name: name,
-    url: url
+    name: req.body.name,
+    url: req.body.url
   }).then(function(c) {
+    req.flash('success', 'Category created.');
     res.redirect('/dashboard/categories');
   }).catch(function(err) {
     if(err)
+      req.flash('warning', 'Something went wrong.');
       res.redirect('/dashboard/categories');
   });
 }
 
 exports.destroy = function(req, res, next) {
-  console.log('destroy');
+  Category.destroyById(req.params.id)
+    .then(function() {
+      req.flash('success', 'Category destroyed.');
+      res.redirect('/dashboard/categories');
+    }).catch(function(err) {
+    if (err) {
+      req.flash('warning', 'Something went wrong.');
+      res.redirect('back');
+    }
+  });
 }

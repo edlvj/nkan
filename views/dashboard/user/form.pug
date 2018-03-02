@@ -1,4 +1,6 @@
 extends ../layout
+block title
+  title New user
 
 block content
   ol.breadcrumb
@@ -6,8 +8,8 @@ block content
   
   form(role='form', action="/dashboard/user", method="post")
     .form-group
-      label(for="user_title") Email
-      input.form-control(type='text', name="email", id="user_title")
+      label(for="user_email") Email
+      input.form-control(type='text', name="email", id="user_email")
     .form-group
       label(for="user_password") Password
       input.form-control(type='text', name="url", id="user_password")
