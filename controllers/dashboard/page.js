@@ -1,12 +1,13 @@
 var Page = require('../../models/page');
 
 exports.index = function(req, res, next) {
-  Page.findAll()
-    .then(function(pages) {
-      res.render('dashboard/page', {
-        pages: pages
-      });
+  Page.find({}).exec((err, pages) => {
+    if(err) res.send(err);
+    
+    res.render('dashboard/page', {
+      pages: pages
     });
+  });
 }
 
 exports.new = function(req, res, next) {
@@ -14,39 +15,48 @@ exports.new = function(req, res, next) {
 }
 
 exports.create = function(req, res, next) {
-  Page.create({
-    title: req.body.title,
-    body: req.body.body
-  }).then(function(p) {
-    req.flash('success', 'Post added.');
-    res.redirect('/dashboard/posts');
-  }).catch(function(err) {
-    if (err) {
-      req.flash('warning', 'Something went wrong.');
-      res.redirect('/dashboard/posts');
-    }
+  var newPage = new Page(req.body);
+
+  newPage.save((err, page) => {
+    if(err) res.send(err);
+
+    req.flash('success', 'Page created.');
+    res.redirect('/dashboard/page');
   }); 
 }
 
 exports.edit = function(req, res, next) {
-  Page.findOneById(id).then(function(p) {
-    res.render('/dashboard/users/form', {});
-  }).catch(function(err) {
-    if (err) {
-      res.send(404);
-    }
+  Page.findById(req.params.id, (err, page) => {
+    if(err) res.send(err);
+    if(!page) res.status(404);
+
+    res.render('dashboard/page/form', { page: page })
   }); 
 }
 
-exports.destroy = function(req, res, next) {
-  Page.destroyById(req.params.id)
-    .then(function() {
-      req.flash('success', 'Page destroyed.');
-      res.redirect('/dashboard/pages');
-    }).catch(function(err) {
-      if (err) {
+exports.update = function(req, res, next) {
+  Page.findById({_id: req.params.id}, (err, page) => {
+    if(err) res.send(err);
+    if(!page) res.status(404);
+
+    Object.assign(page, req.body).save((err, page) => {
+      if(err) {
         req.flash('warning', 'Something went wrong.');
-        res.redirect('back');
       }
+      req.flash('success', 'Page updated.');
+      res.redirect('/dashboard/page');
+    });
+  });
+}
+
+exports.destroy = function(req, res, next) {
+  Page.findById(req.params.id, (err, page) => {
+    if(err) res.send(err);
+    if(!page) res.status(404);
+
+    Page.remove({_id : req.params.id}, (err, result) => {
+      req.flash('success', 'Page destroyed.');
+      res.redirect('back');
+    });
   });
 }

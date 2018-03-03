@@ -1,26 +1,56 @@
 var express = require('express');
 var passport = require('passport');
-var user = require('../../models/user');
 
 var dashboard = require('../../controllers/dashboard');
-var category = require('../../controllers/dashboard/category');
+
+var dataset = require('../../controllers/dashboard/dataset');
 var user = require('../../controllers/dashboard/user');
 var page = require('../../controllers/dashboard/page');
+var category = require('../../controllers/dashboard/category');
 
 var router = express.Router();
 
 router.get('/', dashboard.index);
 
-router.get('/pages', page.index);
+//page
+router.route('/page')
+  .get(page.index)
+  .post(page.create);
+
 router.get('/page/new', page.new);
 
-router.get('/categories', category.index);
-router.get('/category/new', category.new);
-router.post('/category', category.create);
+router.route('/page/:id')
+  .get(page.edit)
+  .put(page.update)
+ // .delete(page.delete);
 
-router.get('/users', user.index);
+// category
+router.route('/category')
+  .get(category.index)
+  .post(category.create);
+
+router.get('/category/new', category.new);
+
+router.route('/category/:id')
+  .get(category.edit)
+  .put(category.update)
+  .delete(category.delete);
+
+//users
+
+router.route('/user')
+  .get(page.index)
+  .post(page.create);
+
 router.get('/user/new', user.new);
-router.post('/user', user.create);
+
+// datasets
+
+router.route('/dataset')
+  .get(dataset.index)
+  .post(dataset.create);
+
+router.get('/dataset/new', dataset.new);
 
 router.get('/login', function(req, res, next) {
   res.render('dashboard/login', { user : req.user });

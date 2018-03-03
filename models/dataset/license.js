@@ -3,5 +3,4 @@ var licences = [{
   "url": "http://opendefinition.org/licenses/cc-zero/"
 }];
 
-
 module.exports = licenses;

@@ -16,7 +16,14 @@ var indexRoute = require('./routes/index');
 var dashboardRoute = require('./routes/dashboard/index');
 
 var app = express();
-var config = require('./config');
+
+switch (process.env.NODE_ENV) {
+  case 'test':
+    var config = require('./config/test')
+    break;
+  default:
+    var config = require('./config/test');
+}
 
 mongoose.connect(config.db, function(err) {
   if (err) {

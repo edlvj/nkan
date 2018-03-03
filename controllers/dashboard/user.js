@@ -1,12 +1,13 @@
 var User = require('../../models/user');
 
 exports.index = function(req, res, next) {
-  User.findAll()
-    .then(function(users) {
-      res.render('dashboard/user', {
-        users: users
-      });
+  User.find({}).exec((err, users) => {
+    if(err) res.send(err);
+    
+    res.render('dashboard/user', {
+      users: users
     });
+  });
 }
 
 exports.new = function(req, res, next) {
@@ -14,58 +15,49 @@ exports.new = function(req, res, next) {
 }
 
 exports.create = function(req, res, next) { 
-  User.create({
-    title: title,
-    contents: contents,
-    url: url,
-    category: category,
-    keywords: keywords
-  }).then(function(p) {
-    req.flash('success', 'User added.');
-    res.redirect('/dashboard/users');
-  }).catch(function(err) {
-    if (err) {
-      req.flash('warning', 'Something went wrong.');
-      res.redirect('/dashboard/users');
-    }
-  });   
+  var newUser = new User(req.body);
+
+  newUser.save((err, category) => {
+    if(err) res.send(err);
+
+    req.flash('success', 'User created.');
+    res.redirect('/dashboard/user');
+  });  
 }
 
 exports.edit = function(req, res, next) {
-  User.findOneById(id).then(function(p) {
-    res.render('/dashboard/users/form', {});
-  }).catch(function(err) {
-    if (err) {
-      res.send(404);
-    }
-  }); 
+  User.findById(req.params.id, (err, user) => {
+    if(err) res.send(err);
+    if(!user) res.status(404);
+
+    res.render('dashboard/user/form', { user: user })
+  });  
 }
 
 exports.update = function(req, res, next) {
-  User.updateById(req.params.id, {
-    email: req.body.email,
-    password: this.generateHash(req.body.password),
-    admin: req.body.admin,
-  }).then(function(p) {
-    req.flash('success', 'User updated.');
-    res.redirect('back');
-  }).catch(function(err) {
-    if (err) {
-      req.flash('warning', 'Something went wrong.');
-      res.redirect('back');
-    }
+  User.findById({_id: req.params.id}, (err, user) => {
+    if(err) res.send(err);
+    if(!user) res.status(404);
+
+    Object.assign(user, req.body).save((err, user) => {
+      if(err) {
+        req.flash('warning', 'Something went wrong.');
+      }
+      req.flash('success', 'User updated.');
+      res.redirect('/dashboard/user');
+    }); 
   });
 }
 
 exports.destroy = function(req, res, next) {
-  User.destroyById(req.params.id)
-    .then(function() {
+  User.findById(req.params.id, (err, user) => {
+    if(err) res.send(err);
+    if(!user) res.status(404);
+
+    User.remove({_id : req.params.id}, (err, result) => {
       req.flash('success', 'User destroyed.');
-      res.redirect('/dashboard/users');
-    }).catch(function(err) {
-    if (err) {
-      req.flash('warning', 'Something went wrong.');
       res.redirect('back');
-    }
+    });
   });
+
 }

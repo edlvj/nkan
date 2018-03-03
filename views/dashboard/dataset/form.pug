@@ -3,4 +3,14 @@ block title
   title Datasets New
 
 block content
-  h1 New Datasets
+  ol.breadcrumb
+    li.active New Dataset
+
+  form(role='form', action="/dashboard/dataset", method="post")
+    .form-group
+      label(for="data_title") Title
+      input.form-control(type='text', name="title" id="data_title")
+    .form-group
+      label(for="data_description") Category
+      input.form-control(type='text', name="url" id="category_url")
+    button.btn.btn-default(type='submit') Submit
