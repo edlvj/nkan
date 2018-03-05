@@ -6,7 +6,6 @@ let chai = require('chai');
 let should = chai.should();
 
 describe('Category', function() {
-
   before(function(done) {
     db = mongoose.connect(config.db);
     done();
@@ -20,7 +19,7 @@ describe('Category', function() {
   beforeEach(function(done) {
     var category = new Category({
       title: 'lorem',
-      url: 'ipsum'
+      slug: 'ipsum'
     });
 
     category.save(function(error) {
@@ -30,8 +29,8 @@ describe('Category', function() {
   });
 
   it('find a category by title', function(done) {
-    Category.findOne({ title: 'lorem' }, function(err, comment) {
-      comment.title.should.eql('lorem');
+    Category.findOne({ title: 'lorem' }, function(err, category) {
+      category.title.should.eql('lorem');
       done();
     });
   });

@@ -7,7 +7,7 @@ var CategorySchema = new Schema({
     unique: true,
     required: true
   },
-  url: {
+  slug: {
     type: String,
     unique: true,
     required: true

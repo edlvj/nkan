@@ -42,14 +42,13 @@ describe('Categories Controller', () => {
     it('it should create category', (done) => {
       let category = {
         title: 'test',
-        url: 'test'
+        slug: 'test'
       }
       chai.request(server)
         .post('/dashboard/category')
         .send(category)
         .redirects(0)
         .end((err, res) => {
-        	console.log(res.body);
           res.should.have.status(302);
           res.req.path.should.equal('/dashboard/category');
           done();
@@ -59,7 +58,11 @@ describe('Categories Controller', () => {
 
   describe('/GET dashboard/category/:id', () => {
     it('it should GET a category edit by the given id', (done) => {
-      let category = new Category({ title: "Rings", url: "lord" });
+      let category = new Category(
+      {
+       title: "Rings", 
+       slug: "lord" 
+     });
 
       category.save((err, category) => {
         chai.request(server)
@@ -75,7 +78,10 @@ describe('Categories Controller', () => {
 
   describe('/PUT dashboard/category/:id', () => {
     it('it should PUT update edit by the given id', (done) => {
-      let category = new Category({ title: "Narnia", url: "lord" });
+      let category = new Category({ 
+      	title: "Narnia", 
+      	slug: "lord" 
+      });
 
       category.save((err, category) => {
         chai.request(server)
@@ -91,7 +97,10 @@ describe('Categories Controller', () => {
 
   describe('/DELETE/:id category', () => {
     it('it should DELETE a category given the id', (done) => {
-      let category = new Category({ title: "Narnia", url: "lord" });
+      let category = new Category({
+       title: "Narnia", 
+       slug: "lord" 
+     });
       category.save((err, category) => {
         chai.request(server)
         .delete('/dashboard/category/'+ category.id)

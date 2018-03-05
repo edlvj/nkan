@@ -1,40 +1,52 @@
-var expect = require('chai').expect
-    mongoose = require('mongoose');
+var mongoose = require('mongoose');
+let User = require('../../models/user');
+var config = require('../../config/test');
+
+let chai = require('chai');
+let should = chai.should();
 
 describe('User', function() {
-  var User;
+
+  before(function(done) {
+    db = mongoose.connect(config.db);
+    done();
+  });
+
+  after(function(done) {
+    mongoose.connection.close();
+    done();
+  });
 
   beforeEach(function(done) {
-    mongoose.connect('mongodb://localhost/test_mocha_example');
-    mongoose.connection.once('connected', () => {
-      mongoose.connection.db.dropDatabase();
+    var user = new User({
+      email: 'test@test.com',
+      password: 'lorem ipsum',
+      admin: true
+    });
 
-      require('./models').registerModels();
-      // This is the right model because ^registerModels set it up for us.
-      User = mongoose.model('user');
+    user.save(function(error) {
+      if (error) console.log('error' + error.message);
       done();
     });
   });
 
-  // afterEach(function(done) {
-  //   mongoose.disconnect();
-  //   done();
-  // });
+  it('find a user by title', function(done) {
+    User.findOne({ email: 'test@test.com' }, function(err, user) {
+      user.email.should.eql('test@test.com');
+      done();
+    });
+  });
 
-  // describe('Lifecycle', function() {
+  it('generate hash for password', function(done) {
+    User.findOne({ email: 'test@test.com' }, function(err, user) {
+      user.generateHash('1234').should.to.be.a('string');
+      done();
+    });
+  });
 
-  //   it('should not save without password', function(done) {
-  //     var user = new User({
-  //       email: "alex1@alex.com"
-  //     });
-  //     user.save(function(err) {
-  //       expect(err).to.exist
-  //         .and.be.instanceof(Error)
-  //         .and.have.property('message', 'user validation failed');
-  //       done();
-  //     });
-  //   });
-
-  // });
-
+  afterEach(function(done) {
+    User.remove({}, function() {
+      done();
+    });
+  });
 });

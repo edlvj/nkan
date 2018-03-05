@@ -10,9 +10,7 @@ var category = require('../../controllers/dashboard/category');
 
 var router = express.Router();
 
-router.get('/', dashboard.index);
-
-//page
+//pages
 router.route('/page')
   .get(page.index)
   .post(page.create);
@@ -22,9 +20,9 @@ router.get('/page/new', page.new);
 router.route('/page/:id')
   .get(page.edit)
   .put(page.update)
- // .delete(page.delete);
+  .delete(page.delete);
 
-// category
+// categories
 router.route('/category')
   .get(category.index)
   .post(category.create);
@@ -39,30 +37,37 @@ router.route('/category/:id')
 //users
 
 router.route('/user')
-  .get(page.index)
-  .post(page.create);
+  .get(user.index)
+  .post(user.create);
 
 router.get('/user/new', user.new);
 
-// datasets
+router.route('/user/:id')
+  .get(user.edit)
+  .put(user.update)
+  .delete(user.delete);
 
+// datasets
 router.route('/dataset')
   .get(dataset.index)
   .post(dataset.create);
 
 router.get('/dataset/new', dataset.new);
 
-router.get('/login', function(req, res, next) {
-  res.render('dashboard/login', { user : req.user });
-});
+router.route('/dataset/:id')
+  .get(dataset.edit)
+  .put(dataset.update)
+  .delete(dataset.delete);
 
-router.get('/logout', function(req, res, next) {
-  req.logout();
-  res.redirect('/');
-});
+//dashboard
+router.get('/', dashboard.index);
 
-router.post('/login', passport.authenticate('local'), function(req, res) {
+router.route('/login')
+  .get(dashboard.login)
+  .post(passport.authenticate('local'), function(req, res) {
     res.redirect('/');
-});
+  });
+
+router.get('/logout', dashboard.logout);
 
 module.exports = router;

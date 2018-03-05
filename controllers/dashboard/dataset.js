@@ -1,7 +1,7 @@
 var DataSet = require('../../models/dataset');
 
 exports.index = function(req, res, next) {
-	DataSet.find({}).exec((err, datasets) => {
+  DataSet.find({}).exec((err, datasets) => {
     if(err) res.send(err);
     
     res.render('dashboard/dataset', {
@@ -24,7 +24,7 @@ exports.edit = function(req, res, next) {
 }
 
 exports.create = function(req, res, next) {
-	var newDataSet = new DataSet(req.body);
+  var newDataSet = new DataSet(req.body);
 
   newDataSet.save((err, category) => {
     if(err) res.send(err);
@@ -34,5 +34,29 @@ exports.create = function(req, res, next) {
   });
 }
 
-exports.destroy = function(req, res, next) {
+exports.delete = function(req, res, next) {
+	DataSet.findById(req.params.id, (err, page) => {
+    if(err) res.send(err);
+    if(!page) res.status(404);
+
+    DataSet.remove({_id : req.params.id}, (err, result) => {
+      req.flash('success', 'DataSet destroyed.');
+      res.redirect('back');
+    });
+  });
+}
+
+exports.update = function(req, res, next) {
+  DataSet.findById({_id: req.params.id}, (err, dataset) => {
+    if(err) res.send(err);
+    if(!dataset) res.status(404);
+
+    Object.assign(dataset, req.body).save((err, dataset) => {
+      if(err) {
+        req.flash('warning', 'Something went wrong.');
+      }
+      req.flash('success', 'Dataset updated.');
+      res.redirect('/dashboard/category');
+    }); 
+  });
 }

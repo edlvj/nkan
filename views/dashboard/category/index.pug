@@ -25,9 +25,9 @@ block content
                 td= category.title
                 td= category.url
                 td
-                  a(href='/dashboard/category/' + category.id + '/edit') Edit 
+                  a(href='/dashboard/category/' + category.id) Edit 
                   span |
-                  a(href='/dashboard/category/' + category.id + '/delete')  Delete
+                  a(href='/dashboard/category/' + category.id)  Delete
 
 block footer_scripts
   include ./../_footer.pug

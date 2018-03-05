@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
-let Page = require('../../models/page');
+let DataSet = require('../../models/dataset');
 var config = require('../../config/test');
 
 let chai = require('chai');
 let should = chai.should();
 
-describe('Page', function() {
+describe('Dataset', function() {
 
   before(function(done) {
     db = mongoose.connect(config.db);
@@ -18,27 +18,30 @@ describe('Page', function() {
   });
 
   beforeEach(function(done) {
-    var page = new Page({
+    var dataset = new DataSet({
       title: 'lorem',
-      body: 'lorem ipsum',
-      url: 'ipsum'
+      description: 'lorem ipsum',
+      category: 'ipsum',
+      license: 'dsds',
+      user: 'dsds',
+      status: 'active'
     });
 
-    page.save(function(error) {
+    dataset.save(function(error) {
       if (error) console.log('error' + error.message);
       done();
     });
   });
 
-  it('find a category by title', function(done) {
-    Page.findOne({ title: 'lorem' }, function(err, page) {
+  it('find a dataSet by title', function(done) {
+    DataSet.findOne({ title: 'lorem' }, function(err, page) {
       page.title.should.eql('lorem');
       done();
     });
   });
 
   afterEach(function(done) {
-    Page.remove({}, function() {
+    DataSet.remove({}, function() {
       done();
     });
   });

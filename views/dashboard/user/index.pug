@@ -25,9 +25,10 @@ block content
                 td= user.email
                 td= user.admin
                 td 
-                  a(href='/dashboard/user/' + user.id + '/edit') Edit 
-                  span |
-                  a(href='/dashboard/user/' + user.id + '/delete')  Delete 
+                  a(href='/dashboard/user/' + user.id) Edit 
+                  span
+                    form(method="DELETE" action='/dashboard/user/' + user.id)
+                      button(type='submit')  Delete 
 
 block footer_scripts
   include ./../_footer.pug

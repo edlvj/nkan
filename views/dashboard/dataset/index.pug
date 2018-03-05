@@ -1,7 +1,38 @@
 extends ../layout
-
 block title
   title Datasets
 
+block head_scripts
+  include ./../_header.pug
+  link(href='/css/dataTables.bootstrap4.css', rel='stylesheet')  
+
 block content
-  h1 Datasets
+  .card.mb-3
+    .card-header
+      i.fa.fa-table
+      | Datasets
+    .card-body
+      .table-responsive
+        table#dataTable.table.table-bordered(width='100%', cellspacing='0')
+          thead
+            tr
+              th Title
+              th License
+              th Category
+              th Manage
+          tbody
+            each dataset in datasets
+              tr
+                td= dataset.title
+                td= dataset.license
+                td= dataset.category
+                td
+                  a(href='/dashboard/dataset/' + dataset.id) Edit 
+                  span |
+                  a(href='/dashboard/dataset/' + dataset.id)  Delete
+
+block footer_scripts
+  include ./../_footer.pug
+  script(src='/js/jquery.dataTables.js')
+  script(src='/js/dataTables.bootstrap4.js')
+  script(src='/js/sb-admin-datatables.min.js')     

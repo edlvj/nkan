@@ -8,9 +8,19 @@ block content
 
   form(role='form', action="/dashboard/dataset", method="post")
     .form-group
-      label(for="data_title") Title
-      input.form-control(type='text', name="title" id="data_title")
+      label(for="dataset_title") Title
+      input.form-control(type='text', name="title" id="dataset_title")
     .form-group
-      label(for="data_description") Category
-      input.form-control(type='text', name="url" id="category_url")
+      label(for="dataset_description") Description
+      textarea.form-control(type='text', name="url" id="dataset_description")
+    .form-group
+      label(for="dataset_license") License
+      select.form-control(type='text', name="url" id="dataset_license")
+        option 1
+        option 2
+    .form-group
+      label(for="dataset_category") Category
+      select.form-control(type='text', name="url" id="dataset_category")
+        option 1
+        option 2
     button.btn.btn-default(type='submit') Submit

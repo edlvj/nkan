@@ -5,7 +5,7 @@ nav#mainNav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
   #navbarResponsive.collapse.navbar-collapse
     ul#exampleAccordion.navbar-nav.navbar-sidenav
       li.nav-item(data-toggle='tooltip', data-placement='right', title='Dashboard')
-        a.nav-link(href='index.html')
+        a.nav-link(href='/dashboard')
           i.fa.fa-fw.fa-dashboard
           span.nav-link-text
             | Dashboard
@@ -19,23 +19,23 @@ nav#mainNav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
             a(href='/dashboard/dataset') All data sets
           li
             a(href='/dashboard/dataset/new') New
-      li.nav-item(data-toggle='tooltip', data-placement='right', title='Components')
-        a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseComponents', data-parent='#exampleAccordion')
+      li.nav-item(data-toggle='tooltip', data-placement='right', title='Category')
+        a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseCategories', data-parent='#exampleAccordion')
           i.fa.fa-fw.fa-folder
           span.nav-link-text
             | Category
-        ul#collapseComponents.sidenav-second-level.collapse
+        ul#collapseCategories.sidenav-second-level.collapse
           li
             a(href='/dashboard/category') All categories
           li
             a(href='/dashboard/category/new') New
 
       li.nav-item(data-toggle='tooltip', data-placement='right', title='Pages')
-        a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseExamplePages', data-parent='#exampleAccordion')
+        a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapsePages', data-parent='#exampleAccordion')
           i.fa.fa-fw.fa-file
           span.nav-link-text
             | Pages
-        ul#collapseExamplePages.sidenav-second-level.collapse
+        ul#collapsePages.sidenav-second-level.collapse
           li
             a(href='/dashboard/page') All pages
           li
@@ -50,15 +50,6 @@ nav#mainNav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
             a(href='/dashboard/user') All users
           li
             a(href='/dashboard/user/new') New
-      li.nav-item(data-toggle='tooltip', data-placement='right', title='Link')
-        a.nav-link(href='#')
-          i.fa.fa-fw.fa-link
-          span.nav-link-text
-            | Settings
-    ul.navbar-nav.sidenav-toggler
-      li.nav-item
-        a#sidenavToggler.nav-link.text-center
-          i.fa.fa-fw.fa-angle-left
     ul.navbar-nav.ml-auto
       li.nav-item
         a.nav-link

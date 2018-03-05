@@ -49,7 +49,7 @@ exports.update = function(req, res, next) {
   });
 }
 
-exports.destroy = function(req, res, next) {
+exports.delete = function(req, res, next) {
   Page.findById(req.params.id, (err, page) => {
     if(err) res.send(err);
     if(!page) res.status(404);

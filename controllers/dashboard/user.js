@@ -15,9 +15,11 @@ exports.new = function(req, res, next) {
 }
 
 exports.create = function(req, res, next) { 
+  //console.log(req.body);
+
   var newUser = new User(req.body);
 
-  newUser.save((err, category) => {
+  newUser.save((err, user) => {
     if(err) res.send(err);
 
     req.flash('success', 'User created.');
@@ -49,7 +51,7 @@ exports.update = function(req, res, next) {
   });
 }
 
-exports.destroy = function(req, res, next) {
+exports.delete = function(req, res, next) {
   User.findById(req.params.id, (err, user) => {
     if(err) res.send(err);
     if(!user) res.status(404);
@@ -59,5 +61,4 @@ exports.destroy = function(req, res, next) {
       res.redirect('back');
     });
   });
-
 }
