@@ -25,7 +25,7 @@ describe('Dashboard Controller', () => {
   describe('/GET /login', () => {
     it('it should GET login', (done) => {
       chai.request(server)
-      .get('/login')
+      .get('/dashboard/login')
       .end((err, res) => {
         res.should.have.status(200);
         done();

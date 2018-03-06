@@ -1,0 +1,19 @@
+extends ../layout
+block title
+  title Edit Category
+
+block content
+  ol.breadcrumb
+    li.active Edit Category
+  
+  include ../_error.pug
+
+  form(role='form', action='/dashboard/category/' + category.id , method="post")
+    input(type="hidden" name="_method" value="PUT")
+    .form-group
+      label(for="category_title") Title
+      input.form-control(type='text', name="title" id="category_title", required="", value=category.title)
+    .form-group
+      label(for="category_slug") Slug
+      input.form-control(type='text', name="slug" id="category_slug", required="", value=category.slug)
+    button.btn.btn-default(type='submit') Submit

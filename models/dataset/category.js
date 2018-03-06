@@ -1,16 +1,27 @@
 var mongoose = require('mongoose');
+var validate = require('mongoose-validator')
 var Schema = mongoose.Schema;
+
+var stringRangeValidator = [
+  validate({
+    validator: 'isLength',
+    arguments: [2, 100],
+    message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters',
+  })
+];
 
 var CategorySchema = new Schema({
   title: {
     type: String,
     unique: true,
-    required: true
+    required: true,
+    validate: stringRangeValidator
   },
   slug: {
     type: String,
     unique: true,
-    required: true
+    required: true,
+    validate: stringRangeValidator
   }
 },
 {

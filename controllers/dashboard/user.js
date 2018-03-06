@@ -15,8 +15,6 @@ exports.new = function(req, res, next) {
 }
 
 exports.create = function(req, res, next) { 
-  //console.log(req.body);
-
   var newUser = new User(req.body);
 
   newUser.save((err, user) => {

@@ -35,6 +35,16 @@ describe('Category', function() {
     });
   });
 
+  it('should be invalid if title and slug is empty', function(done) {
+      var c = new Category();
+
+      c.validate(function(err) {
+        err.errors.title.should.to.exist;
+        err.errors.slug.should.to.exist;
+        done();
+      });
+  });
+
   afterEach(function(done) {
     Category.remove({}, function() {
       done();

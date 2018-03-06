@@ -5,6 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 var mongoose = require('mongoose');
 var i18n = require('i18next');
 var passport = require('passport');
@@ -40,6 +41,8 @@ i18n.init({
     debug: true
 });
 
+app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(methodOverride('_method'));
 // view engine setup
 app.set('views', [path.join(__dirname, 'views'), path.join(__dirname, 'templates/' + config.template) ]);
 app.set('view engine', 'pug');
@@ -58,12 +61,19 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    var method = req.body._method;
+    delete req.body._method;
+    return method;
+  }
+}));
+
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password'
 },
   function(email, password, done) {
-    console.log(email);
     User.findOne({ email: email }, function(err, user) {
       console.log(err);
       if (err) { return done(err); }
@@ -98,15 +108,20 @@ app.use('/', indexRoute);
 app.use('/dashboard', ensureLogined, dashboardRoute);
 
 app.use(function(req, res, next) {
-  res.status = 404;
-  res.render('404');
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
 });
 
-app.use(function(err, req, res, next) {  
+
+app.use(function(err, req, res, next) {
   res.status(err.status || 500);
+
+  console.log( req.app.get('env'));
+
   res.render('500', {
-    message: err.message,
-    error: {}
+    message: req.app.get('env') === 'development' ? err.message : 'Something went wrong',
+    error: req.app.get('env') === 'development' ? err : {}
   });
 });
 

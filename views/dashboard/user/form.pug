@@ -9,7 +9,7 @@ block content
   form(role='form', action="/dashboard/user", method="post")
     .form-group
       label(for="user_email") Email
-      input.form-control(type='email', name="email", id="user_email")
+      input.form-control(type='email', name="email", id="user_email", required="")
     .form-group
       label(for="user_password") Password
       input.form-control(type='text', name="password", id="user_password")

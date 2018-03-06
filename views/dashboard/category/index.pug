@@ -17,17 +17,19 @@ block content
           thead
             tr
               th Title
-              th Url
+              th Slug
               th Manage
           tbody
             each category in categories
               tr
                 td= category.title
-                td= category.url
+                td= category.slug
                 td
                   a(href='/dashboard/category/' + category.id) Edit 
                   span |
-                  a(href='/dashboard/category/' + category.id)  Delete
+                  form(method="post" action='/dashboard/category/' + category.id)
+                    input(type="hidden" name="_method" value="DELETE")
+                    button(type='submit') Delete 
 
 block footer_scripts
   include ./../_footer.pug

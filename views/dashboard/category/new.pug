@@ -5,12 +5,14 @@ block title
 block content
   ol.breadcrumb
     li.active New Category
+  
+  include ../_error.pug
 
   form(role='form', action="/dashboard/category", method="post")
     .form-group
       label(for="category_title") Title
-      input.form-control(type='text', name="title" id="category_title")
+      input.form-control(type='text', name="title" id="category_title", required="", value=category.title)
     .form-group
-      label(for="category_slug") Url
-      input.form-control(type='text', name="url" id="category_slug")
+      label(for="category_slug") Slug
+      input.form-control(type='text', name="slug" id="category_slug", required="", value=category.slug)
     button.btn.btn-default(type='submit') Submit
