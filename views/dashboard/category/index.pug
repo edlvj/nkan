@@ -25,11 +25,13 @@ block content
                 td= category.title
                 td= category.slug
                 td
-                  a(href='/dashboard/category/' + category.id) Edit 
-                  span |
-                  form(method="post" action='/dashboard/category/' + category.id)
-                    input(type="hidden" name="_method" value="DELETE")
-                    button(type='submit') Delete 
+                  div(style="display: -webkit-box;")
+                    a(href='/dashboard/category/' + category.id) 
+                      button.btn Edit 
+                    span 
+                    form(method="post" action='/dashboard/category/' + category.id)
+                      input(type="hidden" name="_method" value="DELETE")
+                      button.btn.btn-danger(type='submit') Delete
 
 block footer_scripts
   include ./../_footer.pug

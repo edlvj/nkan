@@ -21,7 +21,7 @@ describe('Page', function() {
     var page = new Page({
       title: 'lorem',
       body: 'lorem ipsum',
-      url: 'ipsum'
+      slug: 'ipsum'
     });
 
     page.save(function(error) {

@@ -1,0 +1,21 @@
+extends ../layout
+block title
+  title Edit page
+
+block content
+  ol.breadcrumb
+    li.active Edit Page
+  include ../_error.pug  
+  
+  form(role='form', action='/dashboard/page/' + page.id , method="post")
+    input(type="hidden" name="_method" value="PUT")
+    .form-group
+      label(for="page_title") Title
+      input.form-control(type='text', name="title", id="page_title", required="", value=page.title)
+    .form-group
+      label(for="page_slug") Slug
+      input.form-control(type='text', name="slug", id="page_slug", required="", value=page.slug)    
+    .form-group
+      label(for="page_body") Body
+      textarea.form-control(name="body", id="page_body", required="")= page.body
+    button.btn.btn-default(type='submit') Submit

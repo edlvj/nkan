@@ -18,12 +18,11 @@ exports.new = function(req, res, next) {
 }
 
 exports.create = function(req, res, next) {
-  let newCategory = new Category(req.body);
+  let newCategory = new Category(req.body); 
 
   newCategory.save((err, category) => {
     if(err) {
       res.render('dashboard/category/new', {
-        category: category, 
         err: err 
       });
     } else {
@@ -35,7 +34,7 @@ exports.create = function(req, res, next) {
 
 exports.edit = function(req, res, next) {
   Category.findById(req.params.id, (err, category) => {
-    if(err || !category) return next(err); 
+    if(err || !category) return next(err);
 
     res.render('dashboard/category/edit', {
       category: category 

@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 
 var PageSchema = new Schema({
@@ -11,7 +12,7 @@ var PageSchema = new Schema({
     type: String,
     require: true
   },
-  url: {
+  slug: {
     type: String,
     unique: true,
     require: true
@@ -21,4 +22,5 @@ var PageSchema = new Schema({
   timestamps: true
 });
 
+PageSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('Page', PageSchema);

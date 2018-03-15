@@ -1,11 +1,12 @@
 var mongoose = require('mongoose');
-var validate = require('mongoose-validator')
+var validate = require('mongoose-validator');
+var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 
 var stringRangeValidator = [
   validate({
     validator: 'isLength',
-    arguments: [2, 100],
+    arguments: [1, 100],
     message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters',
   })
 ];
@@ -28,4 +29,5 @@ var CategorySchema = new Schema({
   timestamps: true
 });
 
+CategorySchema.plugin(uniqueValidator);
 module.exports = mongoose.model('Category', CategorySchema);

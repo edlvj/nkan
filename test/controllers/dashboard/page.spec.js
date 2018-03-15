@@ -43,7 +43,7 @@ describe('Pages', () => {
       let page = {
         title: 'test',
         body: 'test',
-        url: 'url'
+        slug: 'url'
       }
       chai.request(server)
         .post('/dashboard/page')
@@ -63,7 +63,7 @@ describe('Pages', () => {
       let page = new Page({
         title: 'test',
         body: 'test',
-        url: 'url'
+        slug: 'url'
       });
 
       page.save((err, page) => {
@@ -83,7 +83,7 @@ describe('Pages', () => {
       let page = new Page({
         title: 'test',
         body: 'test',
-        url: 'url'
+        slug: 'url'
       });
 
       page.save((err, page) => {
@@ -103,7 +103,7 @@ describe('Pages', () => {
       let page = new Page({
         title: 'test',
         body: 'test',
-        url: 'url'
+        slug: 'url'
       });
 
       page.save((err, page) => {
@@ -116,5 +116,4 @@ describe('Pages', () => {
       });
     });
   });
-
 }); 

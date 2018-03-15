@@ -22,8 +22,11 @@ switch (process.env.NODE_ENV) {
   case 'test':
     var config = require('./config/test')
     break;
+  case 'prod':
+    var config = require('./config/prod')
+    break;  
   default:
-    var config = require('./config/test');
+    var config = require('./config/dev');
 }
 
 mongoose.connect(config.db, function(err) {

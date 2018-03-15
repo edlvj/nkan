@@ -17,15 +17,23 @@ block content
           thead
             tr
               th Title
+              th Slug
+              th Body
               th Manage
           tbody
             each page in pages
               tr
                 td= page.title
+                td= page.slug
+                td= page.body
                 td 
-                  a(href='/dashboard/page/' + page.id) Edit 
-                  span |
-                  a(href='/dashboard/page/' + page.id)  Delete 
+                  div(style="display: -webkit-box;")
+                    a(href='/dashboard/page/' + page.id) 
+                      button.btn Edit 
+                    span 
+                    form(method="post" action='/dashboard/page/' + page.id)
+                      input(type="hidden" name="_method" value="DELETE")
+                      button.btn.btn-danger(type='submit') Delete
 
 block footer_scripts
   include ./../_footer.pug
