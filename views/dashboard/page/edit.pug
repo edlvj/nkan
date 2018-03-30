@@ -7,7 +7,7 @@ block content
     li.active Edit Page
   include ../_error.pug  
   
-  form(role='form', action='/dashboard/page/' + page.id , method="post")
+  form(role='form', action='/dashboard/page/' + page.id, method="post")
     input(type="hidden" name="_method" value="PUT")
     .form-group
       label(for="page_title") Title

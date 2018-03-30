@@ -2,8 +2,8 @@ var User = require('../../models/user');
 
 exports.index = function(req, res, next) {
   User.find({}).exec((err, users) => {
-    if(err) res.send(err);
-    
+    if(err) return next(err); 
+
     res.render('dashboard/user', {
       users: users
     });
@@ -11,33 +11,35 @@ exports.index = function(req, res, next) {
 }
 
 exports.new = function(req, res, next) {
-  res.render('dashboard/user/form');
+  res.render('dashboard/user/new');
 }
 
 exports.create = function(req, res, next) { 
   var newUser = new User(req.body);
 
   newUser.save((err, user) => {
-    if(err) res.send(err);
-
-    req.flash('success', 'User created.');
-    res.redirect('/dashboard/user');
+    if(err) {
+      res.render('dashboard/user/new', {
+        err: err 
+      });
+    } else {
+      req.flash('success', 'User created.');
+      res.redirect('/dashboard/user');
+    }  
   });  
 }
 
 exports.edit = function(req, res, next) {
   User.findById(req.params.id, (err, user) => {
-    if(err) res.send(err);
-    if(!user) res.status(404);
+    if(err || !user) return next(err);
 
-    res.render('dashboard/user/form', { user: user })
+    res.render('dashboard/user/edit', { user: user })
   });  
 }
 
 exports.update = function(req, res, next) {
   User.findById({_id: req.params.id}, (err, user) => {
-    if(err) res.send(err);
-    if(!user) res.status(404);
+    if(err || !user) return next(err);
 
     Object.assign(user, req.body).save((err, user) => {
       if(err) {
@@ -51,8 +53,7 @@ exports.update = function(req, res, next) {
 
 exports.delete = function(req, res, next) {
   User.findById(req.params.id, (err, user) => {
-    if(err) res.send(err);
-    if(!user) res.status(404);
+    if(err || !user) return next(err);
 
     User.remove({_id : req.params.id}, (err, result) => {
       req.flash('success', 'User destroyed.');

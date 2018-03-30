@@ -1,0 +1,22 @@
+extends ../layout
+block title
+  title New user
+
+block content
+  ol.breadcrumb
+    li.active New User
+    include ../_error.pug
+  
+  form(role='form', action="/dashboard/user", method="post")
+    .form-group
+      label(for="user_email") Email
+      input.form-control(type='email', name="email", id="user_email", required="")
+    .form-group
+      label(for="user_password") Password
+      input.form-control(type='text', name="password", id="user_password")
+    .form-group
+      .form-check
+        input#adminCheck.form-check-input(type="checkbox", name="user_admin", value="true")
+        label.form-check-label(for="adminCheck")
+          | Admin
+    button.btn.btn-default(type='submit') Submit

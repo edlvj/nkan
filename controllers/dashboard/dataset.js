@@ -24,7 +24,6 @@ exports.create = function(req, res, next) {
   var newDataSet = new DataSet(req.body);
 
   newDataSet.save((err, category) => {
-
     req.flash('success', 'Dataset created.');
     res.redirect('/dashboard/dataset');
   });
