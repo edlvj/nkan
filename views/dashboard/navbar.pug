@@ -1,5 +1,5 @@
 nav#mainNav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
-  a.navbar-brand(href='index.html') NKAN
+  a.navbar-brand(href='/dashboard') NKAN
   button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarResponsive', aria-controls='navbarResponsive', aria-expanded='false', aria-label='Toggle navigation')
     span.navbar-toggler-icon
   #navbarResponsive.collapse.navbar-collapse
@@ -8,50 +8,57 @@ nav#mainNav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
         a.nav-link(href='/dashboard')
           i.fa.fa-fw.fa-dashboard
           span.nav-link-text
-            | Dashboard
+            = t('dashboard.navbar.dashboard')
       li.nav-item(data-toggle='tooltip', data-placement='right', title='Data Sets')
         a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseDatasets', data-parent='#exampleAccordion')
           i.fa.fa-fw.fa-table
           span.nav-link-text
-            | Data Sets
+            = t('dashboard.navbar.datasets')
         ul#collapseDatasets.sidenav-second-level.collapse
           li
-            a(href='/dashboard/dataset') All data sets
+            a(href='/dashboard/dataset') 
+              = t('dashboard.navbar.list')
           li
-            a(href='/dashboard/dataset/new') New
+            a(href='/dashboard/dataset/new')
+              = t('dashboard.navbar.new')
       li.nav-item(data-toggle='tooltip', data-placement='right', title='Category')
         a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseCategories', data-parent='#exampleAccordion')
           i.fa.fa-fw.fa-folder
           span.nav-link-text
-            | Category
+            = t('dashboard.navbar.categories')
         ul#collapseCategories.sidenav-second-level.collapse
           li
-            a(href='/dashboard/category') All categories
+            a(href='/dashboard/category')
+              = t('dashboard.navbar.list')
           li
-            a(href='/dashboard/category/new') New
-
+            a(href='/dashboard/category/new')
+              = t('dashboard.navbar.new')
       li.nav-item(data-toggle='tooltip', data-placement='right', title='Pages')
         a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapsePages', data-parent='#exampleAccordion')
           i.fa.fa-fw.fa-file
           span.nav-link-text
-            | Pages
+            = t('dashboard.navbar.pages')
         ul#collapsePages.sidenav-second-level.collapse
           li
-            a(href='/dashboard/page') All pages
+            a(href='/dashboard/page')
+              = t('dashboard.navbar.list')
           li
-            a(href='/dashboard/page/new') New
+            a(href='/dashboard/page/new')
+              = t('dashboard.navbar.new')
       li.nav-item(data-toggle='tooltip', data-placement='right', title='Users')
         a.nav-link.nav-link-collapse.collapsed(data-toggle='collapse', href='#collapseUsers', data-parent='#exampleAccordion')
           i.fa.fa-fw.fa-users
           span.nav-link-text
-            | Users
+            = t('dashboard.navbar.users')
         ul#collapseUsers.sidenav-second-level.collapse
           li
-            a(href='/dashboard/user') All users
+            a(href='/dashboard/user')
+              = t('dashboard.navbar.list')
           li
-            a(href='/dashboard/user/new') New
+            a(href='/dashboard/user/new')
+              = t('dashboard.navbar.new')
     ul.navbar-nav.ml-auto
       li.nav-item
         a.nav-link
           i.fa.fa-fw.fa-sign-out
-          = t('auth.logout')
+          = t('dashboard.auth.logout')

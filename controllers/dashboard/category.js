@@ -8,14 +8,14 @@ exports.index = function(req, res, next) {
       categories: categories
     });
   });
-}
+};
 
 exports.new = function(req, res, next) {
   let category = new Category();
   res.render('dashboard/category/new', { 
     category: category 
   });
-}
+};
 
 exports.create = function(req, res, next) {
   let newCategory = new Category(req.body); 
@@ -26,11 +26,11 @@ exports.create = function(req, res, next) {
         err: err 
       });
     } else {
-      req.flash('success', 'Category created.');
+      req.flash('success', req.t('dashboard.flash.successfully'));
       res.redirect('/dashboard/category');
     }    
   });
-}
+};
 
 exports.edit = function(req, res, next) {
   Category.findById(req.params.id, (err, category) => {
@@ -40,7 +40,7 @@ exports.edit = function(req, res, next) {
       category: category 
     });
   });    
-}
+};
 
 exports.update = function(req, res, next) {
   Category.findById({_id: req.params.id}, (err, category) => {
@@ -50,20 +50,20 @@ exports.update = function(req, res, next) {
       if(err) {
         res.render('dashboard/category/edit', { category: category, err: err });
       } else {
-        req.flash('success', 'Category updated.');
+        req.flash('success', req.t('dashboard.flash.successfully'));
         res.redirect('/dashboard/category');
       } 
     }); 
   });
-}
+};
 
 exports.delete = function(req, res, next) {
   Category.findById(req.params.id, (err, category) => {
     if(err || !category) return next(err);
 
     Category.remove({_id : category.id}, (err, result) => {
-      req.flash('success', 'Category destroyed.');
+      req.flash('success', req.t('dashboard.flash.successfully'));
       res.redirect('back');
     });
   });
-}
+};

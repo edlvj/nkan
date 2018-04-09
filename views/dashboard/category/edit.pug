@@ -1,19 +1,24 @@
 extends ../layout
 block title
-  title Edit Category
+  title
+    = t('dashboard.edit')
 
 block content
   ol.breadcrumb
-    li.active Edit Category
+    li.active
+      = t('dashboard.edit')
 
   include ../_error.pug
 
   form(role='form', action='/dashboard/category/' + category.id , method="post")
     input(type="hidden" name="_method" value="PUT")
     .form-group
-      label(for="category_title") Title
+      label(for="category_title")
+        = t('dashboard.form.title')
       input.form-control(type='text', name="title" id="category_title", required="", value=category.title)
     .form-group
-      label(for="category_slug") Slug
+      label(for="category_slug")
+        = t('dashboard.form.slug')
       input.form-control(type='text', name="slug" id="category_slug", required="", value=category.slug)
-    button.btn.btn-default(type='submit') Submit
+    button.btn.btn-default(type='submit')
+      = t('dashboard.form.submit')

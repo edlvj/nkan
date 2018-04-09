@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+  .container
+    .row
+      .col-md-8
+        h1.my-4 Data Set
+        p dedskldgkfdgkflgkfdlgkfdlgfdlgkl
+
+        h2 Fields
+        .table-responsive
+          table.table
+            thead
+              tr
+                th(scope='col') Title
+                th(scope='col') Last
+            tbody
+              tr
+                th(scope='row') 1
+                td Otto
+              tr
+                th(scope='row') 2
+                td Thornton
+              tr
+                th(scope='row') 3
+                td the Bird
+        
+        h1 download file
+        h1 watch in throuth api
+
+      .col-md-4
+        .card.my-4
+          include ../layout/_search
+        .card.my-4
+          include _categories
+        .card.my-4
+          include _datatype
+          

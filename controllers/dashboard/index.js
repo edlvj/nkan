@@ -1,5 +1,8 @@
+var DataSet = require('../../models/dataset');
+
 exports.index = function(req, res, next) {
-  res.render('dashboard/index');
+  //var count = DataSet.find({}).count();
+  res.render('dashboard/index', { count: count });
 };
 
 exports.login = function(req, res, next) {

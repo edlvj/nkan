@@ -4,10 +4,10 @@
         "sampleText": "This is localized text."
     },
     "auth": {
-      "login": "Вхід",
-      "logout": "Вихід"
+        "login": "Вхід",
+        "logout": "Вихід"
     },
     "app": {
-      "search": "Пошук"
+        "search": "Пошук"
     }
 }

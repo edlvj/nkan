@@ -1,13 +1,14 @@
 {
     "dashboard": {
-        "name": "i18nextTest",
-        "sampleText": "This is localized text."
-    },
-    "auth": {
-      "login": "Вхід",
-      "logout": "Вихід"
+        "dashboard": "Dashboard",
+        "panel": "Nkan Panel",
+        "auth": {
+            "login": "Login",
+            "logout": "Logout"
+        }
     },
     "app": {
-      "search": "search"
+        "search": "Search",
+        "category": "Category"
     }
 }

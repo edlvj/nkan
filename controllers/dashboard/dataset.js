@@ -10,13 +10,13 @@ exports.index = function(req, res, next) {
 }
 
 exports.new = function(req, res, next) {
-  res.render('dashboard/dataset/form');
+  res.render('dashboard/dataset/new');
 }
 
 exports.edit = function(req, res, next) {
   DataSet.findById(req.params.id, (err, dataset) => {
 
-    res.render('dashboard/dataset/form', { dataset: dataset })
+    res.render('dashboard/dataset/edit', { dataset: dataset })
   }); 
 }
 

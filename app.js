@@ -12,7 +12,11 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('./models/user');
+
+//middlewares
 var ensureLogined = require('./middlewares/ensure_logined');
+var categoriesList = require('./middlewares/categories_list');
+//routes
 var indexRoute = require('./routes/index');
 var dashboardRoute = require('./routes/dashboard/index');
 
@@ -102,12 +106,13 @@ app.use(i18n.handle);
 i18n.registerAppHelper(app);
 
 app.use(function(req, res, next){
+  res.locals.app = config;
   res.locals.warning = req.flash('warning');
   res.locals.success = req.flash('success');
   next();
 });
 
-app.use('/', indexRoute);
+app.use('/', categoriesList, indexRoute);
 app.use('/dashboard', ensureLogined, dashboardRoute);
 
 app.use(function(req, res, next) {
@@ -115,7 +120,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);

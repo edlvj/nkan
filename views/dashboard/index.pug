@@ -1,4 +1,16 @@
 extends layout
 
 block content
-  h1 hello
+  .row
+    .col-xl-3.col-sm-6.mb-3
+      .card.text-white.bg-warning.o-hidden.h-100
+        .card-body
+          .card-body-icon
+            i.fa.fa-fw.fa-list
+          .mr-5
+            = count 
+            Datasets
+        a.card-footer.text-white.clearfix.small.z-1(href='/dashboard/dataset')
+          span.float-left View all
+          span.float-right
+            i.fa.fa-angle-right

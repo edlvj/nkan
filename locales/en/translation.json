@@ -1,14 +1,44 @@
 {
     "dashboard": {
-        "name": "i18nextTest",
-        "sampleText": "This is localized text."
-    },
-    "auth": {
-      "login": "Вхід",
-      "logout": "Logout"
+        "panel": "Nkan Panel",
+        "navbar": {
+            "dashboard": "Dashboard",
+            "datasets": "Data Sets",
+            "categories": "Categories",
+            "pages": "Pages",
+            "users": "Users",
+            "list": "List",
+            "new": "New"
+        },
+        "auth": {
+            "login": "Login",
+            "logout": "Logout",
+            "email": "Email",
+            "password": "Password"
+        },
+        "form": {
+            "title": "Title",
+            "slug": "Slug",
+            "body": "Body",
+            "submit": "Submit"
+        },
+        "manage": "Manage",
+        "edit": "Edit",
+        "new": "New",
+        "delete": "Delete"
+
     },
     "app": {
-      "search": "Search",
-      "category": "Category"
+        "search": "Search",
+        "categories": "Categories",
+        "pagination": {
+            "older": "Older",
+            "newer": "Newer"
+        }
+    },
+    "flash":{
+        "created": "Successfully created.",
+        "updated": "Successfully updated.",
+        "destroyed": "Successfully destroyed."
     }
 }

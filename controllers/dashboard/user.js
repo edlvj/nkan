@@ -23,7 +23,7 @@ exports.create = function(req, res, next) {
         err: err 
       });
     } else {
-      req.flash('success', 'User created.');
+      req.flash('success', req.t('dashboard.flash.successfully'));
       res.redirect('/dashboard/user');
     }  
   });  

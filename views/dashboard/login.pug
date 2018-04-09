@@ -3,7 +3,8 @@ html
   include ./header.pug
 
   block title
-    title Login
+    title
+      = t('dashboard.auth.login')
 
   block head_scripts
     include ./_header.pug
@@ -13,14 +14,17 @@ html
       .container
         .card.card-login.mx-auto.mt-5
           .card-header
-            | Login
+            = t('dashboard.auth.login')
           .card-body
             form(role='form', action="/dashboard/login", method="post")
               .form-group
-                label(for='inputEmail') Email 
-                input#inputEmail.form-control(name='email', type='email', placeholder='Enter email')
+                label(for='inputEmail') 
+                  = t('dashboard.auth.email')
+                input#inputEmail.form-control(name='email', type='email', placeholder= t('dashboard.auth.email'))
               .form-group
-                label(for='inputPassword') Password
-                input#inputPassword.form-control(name='password', type='password', placeholder='Password')
-              button.btn.btn-primary.btn-block(type="submit") Login 
+                label(for='inputPassword')
+                  = t('dashboard.auth.password')
+                input#inputPassword.form-control(name='password', type='password', placeholder= t('dashboard.auth.password'))
+              button.btn.btn-primary.btn-block(type="submit") 
+                = t('dashboard.auth.login')
   include ./_footer

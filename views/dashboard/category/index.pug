@@ -1,6 +1,7 @@
 extends ../layout
 block title
-  title Categories
+  title
+    = t('dashboard.navbar.categories')
 
 block head_scripts
   include ./../_header.pug
@@ -10,15 +11,18 @@ block content
   .card.mb-3
     .card-header
       i.fa.fa-table
-      | Categories
+        = t('dashboard.navbar.categories')
     .card-body
       .table-responsive
         table#dataTable.table.table-bordered(width='100%', cellspacing='0')
           thead
             tr
-              th Title
-              th Slug
-              th Manage
+              th 
+                = t('dashboard.form.title')
+              th
+                = t('dashboard.form.slug')
+              th
+                = t('dashboard.manage')
           tbody
             each category in categories
               tr
@@ -27,11 +31,13 @@ block content
                 td
                   div(style="display: -webkit-box;")
                     a(href='/dashboard/category/' + category.id) 
-                      button.btn Edit 
+                      button.btn
+                        = t('dashboard.edit')
                     span 
                     form(method="post" action='/dashboard/category/' + category.id)
                       input(type="hidden" name="_method" value="DELETE")
-                      button.btn.btn-danger(type='submit') Delete
+                      button.btn.btn-danger(type='submit')
+                        = t('dashboard.delete')
 
 block footer_scripts
   include ./../_footer.pug

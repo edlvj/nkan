@@ -1,11 +1,14 @@
+var DataSet = require('../models/dataset');
+
 exports.index = function(req, res, next) {
-  // res.json('1')
+  DataSet.find({}).exec((err, datasets) => {
+    console.log(res);
+    res.render('dataset/index', {
+      datasets: datasets
+    });
+  });
 }
 
 exports.show = function(req, res, next) {
-  // res.json('1')
-}
-
-exports.category = function(req, res, next) {
-  // res.json('1')
+  res.render('dataset/show')
 }
