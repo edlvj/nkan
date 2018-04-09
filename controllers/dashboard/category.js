@@ -26,7 +26,7 @@ exports.create = function(req, res, next) {
         err: err 
       });
     } else {
-      req.flash('success', req.t('dashboard.flash.successfully'));
+      req.flash('success', req.t('dashboard.flash.created'));
       res.redirect('/dashboard/category');
     }    
   });
@@ -50,7 +50,7 @@ exports.update = function(req, res, next) {
       if(err) {
         res.render('dashboard/category/edit', { category: category, err: err });
       } else {
-        req.flash('success', req.t('dashboard.flash.successfully'));
+        req.flash('success', req.t('dashboard.flash.updated'));
         res.redirect('/dashboard/category');
       } 
     }); 
@@ -62,7 +62,7 @@ exports.delete = function(req, res, next) {
     if(err || !category) return next(err);
 
     Category.remove({_id : category.id}, (err, result) => {
-      req.flash('success', req.t('dashboard.flash.successfully'));
+      req.flash('success', req.t('dashboard.flash.deleted'));
       res.redirect('back');
     });
   });

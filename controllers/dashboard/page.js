@@ -23,7 +23,7 @@ exports.create = function(req, res, next) {
         err: err 
       });
     } else {
-      req.flash('success', req.t('dashboard.flash.successfully'));
+      req.flash('success', req.t('dashboard.flash.created'));
       res.redirect('/dashboard/page');
     }  
   });
@@ -45,7 +45,7 @@ exports.update = function(req, res, next) {
       if(err) {
         res.render('dashboard/page/edit', { page: page, err: err });
       } else {
-        req.flash('success', req.t('dashboard.flash.successfully'));
+        req.flash('success', req.t('dashboard.flash.updated'));
         res.redirect('/dashboard/page');
       } 
     });
@@ -57,7 +57,7 @@ exports.delete = function(req, res, next) {
     if(err || !page) return next(err);
 
     Page.remove({_id : req.params.id}, (err, result) => {
-      req.flash('success', req.t('dashboard.flash.successfully'));
+      req.flash('success', req.t('dashboard.flash.deleted'));
       res.redirect('back');
     });
   });

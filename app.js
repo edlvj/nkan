@@ -10,14 +10,16 @@ var mongoose = require('mongoose');
 var i18n = require('i18next');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' })
 
 var User = require('./models/user');
 
 //middlewares
-var ensureLogined = require('./middlewares/ensure_logined');
-var categoriesList = require('./middlewares/categories_list');
+var { ensureLogged, categories } = require('./middlewares');
 //routes
 var indexRoute = require('./routes/index');
+var authRoute = require('./routes/dashboard/auth');
 var dashboardRoute = require('./routes/dashboard/index');
 
 var app = express();
@@ -85,15 +87,25 @@ passport.use(new LocalStrategy({
       console.log(err);
       if (err) { return done(err); }
       if (!user || !user.validPassword(password)) {
-        console.log('hi');
         return done(null, false, { message: 'email or password.' });
       }
       return done(null, user);
     });
 }));
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .then((user) => {
+      done(null, user);
+    })
+    .catch((error) => {
+      console.log(`Error: ${error}`);
+    });
+});
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname ,'/node_modules/jquery/dist')));
@@ -112,8 +124,9 @@ app.use(function(req, res, next){
   next();
 });
 
-app.use('/', categoriesList, indexRoute);
-app.use('/dashboard', ensureLogined, dashboardRoute);
+app.use('/', categories, indexRoute);
+app.use('/dashboard', ensureLogged, dashboardRoute);
+app.use('/auth', authRoute);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -123,8 +136,6 @@ app.use(function(req, res, next) {
 
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-
-  console.log( req.app.get('env'));
 
   res.render('500', {
     message: req.app.get('env') === 'development' ? err.message : 'Something went wrong',

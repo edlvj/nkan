@@ -22,6 +22,11 @@
             "body": "Body",
             "submit": "Submit"
         },
+        "flash":{
+            "created": "Successfully created.",
+            "updated": "Successfully updated.",
+            "deleted": "Successfully deleted."
+        },
         "manage": "Manage",
         "edit": "Edit",
         "new": "New",
@@ -35,10 +40,5 @@
             "older": "Older",
             "newer": "Newer"
         }
-    },
-    "flash":{
-        "created": "Successfully created.",
-        "updated": "Successfully updated.",
-        "destroyed": "Successfully destroyed."
     }
 }

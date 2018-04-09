@@ -1,5 +1,4 @@
 var express = require('express');
-var passport = require('passport');
 
 var dashboard = require('../../controllers/dashboard');
 
@@ -35,7 +34,6 @@ router.route('/category/:id')
   .delete(category.delete);
 
 //users
-
 router.route('/user')
   .get(user.index)
   .post(user.create);
@@ -61,13 +59,5 @@ router.route('/dataset/:id')
 
 //dashboard
 router.get('/', dashboard.index);
-
-router.route('/login')
-  .get(dashboard.login)
-  .post(passport.authenticate('local'), function(req, res) {
-    res.redirect('/');
-  });
-
-router.get('/logout', dashboard.logout);
 
 module.exports = router;

@@ -1,4 +1,6 @@
 var express = require('express');
+var passport = require('passport');
+
 var dataset = require('../controllers/dataset');
 var page = require('../controllers/page');
 var router = express.Router();

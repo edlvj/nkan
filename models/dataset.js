@@ -16,17 +16,17 @@ var DataSetSchema = new Schema({
     required: true,
     ref: 'Category'
   },
-  status: {
-    type: String,
-    required: true,
-  },
   user: {
     type: String,
     required: true,
     ref: 'User'
   },
+  status: {
+    type: Number,
+    required: true,
+  },
   license: {
-    type: String,
+    type: Number,
     required: true
   }
 },

@@ -16,14 +16,15 @@ exports.new = function(req, res, next) {
 
 exports.create = function(req, res, next) { 
   var newUser = new User(req.body);
-
+  
+  newUser.password =  newUser.generateHash(newUser.password);
   newUser.save((err, user) => {
     if(err) {
       res.render('dashboard/user/new', {
         err: err 
       });
     } else {
-      req.flash('success', req.t('dashboard.flash.successfully'));
+      req.flash('success', req.t('dashboard.flash.created'));
       res.redirect('/dashboard/user');
     }  
   });  
@@ -41,11 +42,16 @@ exports.update = function(req, res, next) {
   User.findById({_id: req.params.id}, (err, user) => {
     if(err || !user) return next(err);
 
-    Object.assign(user, req.body).save((err, user) => {
-      if(err) {
-        req.flash('warning', 'Something went wrong.');
-      }
-      req.flash('success', 'User updated.');
+    if(!req.body.admin) 
+      req.body.admin = false;
+
+    var newUser = Object.assign(user, req.body);
+
+    if(req.body.password)
+      newUser.password = newUser.generateHash(req.body.password);
+
+    newUser.save((err, user) => {
+      req.flash('success', req.t('dashboard.flash.updated'));
       res.redirect('/dashboard/user');
     }); 
   });
@@ -56,7 +62,7 @@ exports.delete = function(req, res, next) {
     if(err || !user) return next(err);
 
     User.remove({_id : req.params.id}, (err, result) => {
-      req.flash('success', 'User destroyed.');
+      req.flash('success', req.t('dashboard.flash.deleted'));
       res.redirect('back');
     });
   });

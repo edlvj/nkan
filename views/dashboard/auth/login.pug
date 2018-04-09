@@ -1,13 +1,13 @@
 doctype html
 html
-  include ./header.pug
+  include ../header.pug
 
   block title
     title
       = t('dashboard.auth.login')
 
   block head_scripts
-    include ./_header.pug
+    include ../_header.pug
 
   block content
     body.bg-dark
@@ -16,7 +16,7 @@ html
           .card-header
             = t('dashboard.auth.login')
           .card-body
-            form(role='form', action="/dashboard/login", method="post")
+            form(role='form', action="/auth/login", method="post")
               .form-group
                 label(for='inputEmail') 
                   = t('dashboard.auth.email')
@@ -27,4 +27,4 @@ html
                 input#inputPassword.form-control(name='password', type='password', placeholder= t('dashboard.auth.password'))
               button.btn.btn-primary.btn-block(type="submit") 
                 = t('dashboard.auth.login')
-  include ./_footer
+  include ../_footer

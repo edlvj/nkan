@@ -1,4 +1,7 @@
 var DataSet = require('../../models/dataset');
+var Category = require('../../models/dataset/category');
+var licences = require('../../models/dataset/license');
+var statuses = require('../../models/dataset/status');
 
 exports.index = function(req, res, next) {
   DataSet.find({}).exec((err, datasets) => {
@@ -10,13 +13,19 @@ exports.index = function(req, res, next) {
 }
 
 exports.new = function(req, res, next) {
-  res.render('dashboard/dataset/new');
+  Category.find({}).exec((err, categories) => {
+    res.render('dashboard/dataset/new', { 
+      categories: categories, 
+      licences: licences,
+      statuses: statuses
+    });
+  });  
 }
 
 exports.edit = function(req, res, next) {
   DataSet.findById(req.params.id, (err, dataset) => {
 
-    res.render('dashboard/dataset/edit', { dataset: dataset })
+    res.render('dashboard/dataset/edit', { dataset: dataset });
   }); 
 }
 
@@ -24,8 +33,14 @@ exports.create = function(req, res, next) {
   var newDataSet = new DataSet(req.body);
 
   newDataSet.save((err, category) => {
-    req.flash('success', 'Dataset created.');
-    res.redirect('/dashboard/dataset');
+    if(err) {
+      res.render('dashboard/dataset/new', {
+        err: err 
+      });
+    } else {
+      req.flash('success', req.t('dashboard.flash.created'));
+      res.redirect('/dashboard/dataset');
+    }
   });
 }
 

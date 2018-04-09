@@ -14,13 +14,24 @@ block content
       label(for="dataset_description") Description
       textarea.form-control(type='text', name="url" id="dataset_description")
     .form-group
-      label(for="dataset_license") License
-      select.form-control(type='text', name="url" id="dataset_license")
-        option 1
-        option 2
-    .form-group
       label(for="dataset_category") Category
-      select.form-control(type='text', name="url" id="dataset_category")
-        option 1
-        option 2
+      select.form-control(type='text', name="categories[]" id="dataset_category" multiple)
+        each category in categories
+          option(value=category.id)= category.title
+    .form-group
+      label(for="dataset_status") Status
+      select.form-control(type='text', name="status" id="dataset_status")
+        each status in statuses
+          option(value=status.id)= status.title  
+    .form-group
+      label(for="dataset_license") License
+      select.form-control(type='text', name="license" id="dataset_license")
+        each license in licences
+          option(value=license.id)= license.title 
+
+    .form-group
+      label(for="dataset_title") Files
+      input.form-control(type='file', name="files[]" id="dataset_files" multiple)
+
+      
     button.btn.btn-default(type='submit') Submit

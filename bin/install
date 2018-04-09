@@ -1,4 +1,9 @@
 #!/usr/bin/env node
 
+//set env
+
+//site_name
+
 //create admin user
-//set configs
+//set config db
+//check config

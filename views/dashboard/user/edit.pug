@@ -1,15 +1,14 @@
 extends ../layout
 block title
-  title
-    = t('dashboard.edit')
+  title= t('dashboard.edit')
 
 block content
   ol.breadcrumb
-    li.active
-      = t('dashboard.edit')
+    li.active= t('dashboard.edit')
     include ../_error.pug
   
-  form(role='form', action='/dashboard/user' + user.id, method="post")
+  form(role='form', action='/dashboard/user/' + user.id, method="post")
+    input(type="hidden" name="_method" value="PUT")
     .form-group
       label(for="user_email") Email
       input.form-control(type='email', name="email", id="user_email", required="", value=user.email)
@@ -18,7 +17,7 @@ block content
       input.form-control(type='text', name="password", id="user_password")
     .form-group
       .form-check
-        input#adminCheck.form-check-input(type="checkbox", name="admin", value=user.admin)
+        input#adminCheck.form-check-input(type="checkbox", name="admin", value="true")
         label.form-check-label(for="adminCheck")
           | Admin
     button.btn.btn-default(type='submit') Submit
