@@ -1,0 +1,140 @@
+#!/usr/bin/env node
+
+/**
+ * Install script.
+ */
+
+const fs = require('fs');
+const mongoose = require('mongoose');
+const inquirer = require('inquirer');
+const User = require('./../models/user');
+
+const setupAdmin = [
+  {
+    type: 'input',
+    name: 'email',
+    message: 'Enter email for login to dashboard:',
+    validate: function(value) {
+      let done = this.async();
+
+      if(value && /\S+@\S+\.\S+/.test(value)) {
+        done(null, true);
+      } else {
+        done('Incorrect email!');
+      }
+    }
+  },
+  {
+    type: 'password',
+    name: 'password',
+    message: 'Enter password (required 6-12 digits):',
+    validate: function(value) {
+      let done = this.async();
+      
+      if(value && value.length >= 6 && value.length <= 12) {
+        done(null, true);
+      } else {
+        done('Incorrect password!');
+      }
+    }
+  }
+];
+
+const setupConfig = [
+  {
+    type: 'list',
+    name: 'env',
+    message: 'What enviroment you want install?',
+    choices: [
+      'dev',
+      'prod',
+      'test'
+    ],
+    default: function() {
+      return 'dev';
+    }  
+  },
+  {
+    type: 'input',
+    name: 'site_name',
+    message: 'Enter title of app:',
+    validate: function(value) {
+      let done = this.async();
+
+      if(value) {
+        done(null, true);
+      } else {
+        done('Title can\'t be empty!');
+      }
+    }
+  },
+  {
+    type: 'input',
+    name: 'description',
+    message: 'Enter description of app:',
+    validate: function(value) {
+      let done = this.async();
+
+      if(value) {
+        done(null, true);
+      } else {
+        done('Description can\'t be empty');
+      }
+    }
+  },
+  {
+    type: 'input',
+    name: 'db',
+    message: 'Enter connection url for MongoDb(127.0.0.1/nkan):',
+    validate: function(value) {
+      let done = this.async();
+      let dbUrl = 'mongodb://' + value;
+
+      let db = mongoose.connect(dbUrl).then(conn => {
+        if(conn) {
+          conn.disconnect();
+          done(null, true);
+        }
+      })
+      .catch(err=> {
+        if(err) {
+          done('Wrong connection url. Try another');
+          return false;
+        }
+      });
+    }
+  }
+];
+
+const setup = async() => {
+  const configData = await inquirer.prompt(setupConfig);
+  saveConfig(configData);
+  
+  const adminData = await inquirer.prompt(setupAdmin);
+  saveAdmin(adminData);
+}
+
+const toConfig = function(data) {
+  data.template = 'basic';
+  delete data.env;
+  return 'module.exports = ' + JSON.stringify(data);
+}  
+
+const saveConfig = function(data) {
+  let fileName = './config/' + data.env + '.js';
+  return fs.writeFileSync(fileName, toConfig(data));
+}
+
+const saveAdmin = function(user) {
+  var newAdmin = new User(user);
+  
+  newAdmin.password = newAdmin.generateHash(newAdmin.password);
+  newAdmin.admin = true;
+  newAdmin.save((err, user) => {
+    if(!err) {
+      console.log('Succesfully installed.');
+    } 
+  });
+}
+
+setup();

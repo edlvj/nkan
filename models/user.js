@@ -1,9 +1,17 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
-var Schema = mongoose.Schema;
+var validate = require('mongoose-validator');
 var passportLocalMongoose = require('passport-local-mongoose');
 
-var UserSchema = new Schema({
+var passwordRangeValidator = [
+  validate({
+    validator: 'isLength',
+    arguments: [6, 12],
+    message: 'Password should be between {ARGS[0]} and {ARGS[1]} characters',
+  })
+];
+
+var UserSchema = new mongoose.Schema({
   email: {
   	type: String,
     unique: true,
@@ -11,7 +19,8 @@ var UserSchema = new Schema({
   },	
   password: {
   	type: String,
-    require: true
+    require: true,
+    validate: passwordRangeValidator
   },
   admin: {
   	type:Boolean,

@@ -8,7 +8,7 @@ var stringRangeValidator = [
     validator: 'isLength',
     arguments: [1, 100],
     message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters',
-  })
+  });
 ];
 
 var CategorySchema = new Schema({

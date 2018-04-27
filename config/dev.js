@@ -1,7 +1,1 @@
-module.exports = {
-  site_name: "Nkan",
-  keywords: "open data cms",
-  description: "My Site",
-  db: "mongodb://127.0.0.1/nkan",
-  template: 'basic'
-}
+module.exports = {"site_name":"sdsd","description":"dsds","db":"127.0.0.1/nkan","template":"basic"}

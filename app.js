@@ -14,7 +14,6 @@ var multer  = require('multer');
 var upload = multer({ dest: 'uploads/' })
 
 var User = require('./models/user');
-
 //middlewares
 var { ensureLogged, categories } = require('./middlewares');
 //routes

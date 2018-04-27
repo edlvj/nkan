@@ -1,44 +1,43 @@
 {
     "dashboard": {
-        "panel": "Nkan Panel",
+        "panel": "Nkan Панель",
         "navbar": {
-            "dashboard": "Dashboard",
-            "datasets": "Data Sets",
-            "categories": "Categories",
-            "pages": "Pages",
-            "users": "Users",
-            "list": "List",
-            "new": "New"
+            "dashboard": "Панель",
+            "datasets": "Набори даних",
+            "categories": "Категорії",
+            "pages": "Сторінки",
+            "users": "Користувачі",
+            "list": "Список",
+            "new": "Новий"
         },
         "auth": {
-            "login": "Login",
-            "logout": "Logout",
+            "login": "Вхід",
+            "logout": "Вихід",
             "email": "Email",
-            "password": "Password"
+            "password": "Пароль"
         },
         "form": {
-            "title": "Title",
-            "slug": "Slug",
-            "body": "Body",
-            "submit": "Submit"
+            "title": "Заголовок",
+            "slug": "url",
+            "body": "Текст",
+            "submit": "Зберегти"
         },
-        "manage": "Manage",
-        "edit": "Edit",
-        "new": "New",
-        "delete": "Delete"
-
+        "manage": "Управление",
+        "edit": "Правка",
+        "new": "Новий",
+        "delete": "Удалить"
     },
     "app": {
-        "search": "Search",
-        "categories": "Categories",
+        "search": "Пошук",
+        "categories": "Категории",
         "pagination": {
-            "older": "Older",
-            "newer": "Newer"
+            "older": "Старіші",
+            "newer": "Новіші"
         }
     },
     "flash":{
-        "created": "Successfully created.",
-        "updated": "Successfully updated.",
-        "deleted": "Successfully deleted."
+        "created": "Успішно своренно.",
+        "updated": "Успішно обновленно.",
+        "deleted": "Успішно видаленно."
     }
 }
