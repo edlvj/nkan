@@ -5,7 +5,8 @@ block content
     .row
       .col-md-8
         h1.my-4 DataSets
-        include _dataset
+        each dataset in datasets
+          include _dataset
 
         include _pagination
       .col-md-4

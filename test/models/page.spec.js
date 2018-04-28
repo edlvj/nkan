@@ -25,7 +25,7 @@ describe('Page', function() {
     });
 
     page.save(function(error) {
-      if (error) console.log('error' + error.message);
+      if(error) console.log('error' + error.message);
       done();
     });
   });
@@ -37,9 +37,9 @@ describe('Page', function() {
     });
   });
 
-  afterEach(function(done) {
-    Page.remove({}, function() {
-      done();
-    });
-  });
+  // afterEach(function(done) {
+  //   Page.remove({}, function() {
+  //     done();
+  //   });
+  // });
 });

@@ -1,11 +1,17 @@
+var multer  = require('multer');
+var upload = multer({ dest: 'uploads/' });
+
 var DataSet = require('../../models/dataset');
 var Category = require('../../models/dataset/category');
+var File = require('../../models/dataset/file');
+
 var licences = require('../../models/dataset/license');
 var statuses = require('../../models/dataset/status');
 
+exports.uploadFiles = upload.array('files', 3);
+
 exports.index = function(req, res, next) {
   DataSet.find({}).exec((err, datasets) => {
-
     res.render('dashboard/dataset', {
       datasets: datasets
     });
@@ -13,35 +19,54 @@ exports.index = function(req, res, next) {
 }
 
 exports.new = function(req, res, next) {
-  Category.find({}).exec((err, categories) => {
-    res.render('dashboard/dataset/new', { 
-      categories: categories, 
-      licences: licences,
-      statuses: statuses
-    });
-  });  
-}
-
-exports.edit = function(req, res, next) {
-  DataSet.findById(req.params.id, (err, dataset) => {
-
-    res.render('dashboard/dataset/edit', { dataset: dataset });
-  }); 
+  res.render('dashboard/dataset/new', { 
+    categories: res.locals.categories, 
+    licences: licences,
+    statuses: statuses
+  });
 }
 
 exports.create = function(req, res, next) {
-  var newDataSet = new DataSet(req.body);
+  let newDataSet = new DataSet(req.body);
+  newDataSet.user = req.user;
 
-  newDataSet.save((err, category) => {
+  console.log(req.body);
+  console.log(req.user);
+  console.log(req.files);
+
+  newDataSet.save((err, dataset) => {
+    console.log(err);
+    console.log(dataset);
     if(err) {
       res.render('dashboard/dataset/new', {
-        err: err 
+        categories: res.locals.categories,
+        licences: [],
+        statuses: [],
+        err: err
       });
     } else {
+      
+
+      req.files.forEach(function(file) {
+        let datasetFile = new File({
+          name: file.originalname,
+          path: file.path,
+          mime_type: file.mimetype,
+          dataset: dataset.id
+        });
+
+        datasetFile.save();
+      });
       req.flash('success', req.t('dashboard.flash.created'));
       res.redirect('/dashboard/dataset');
     }
   });
+}
+
+exports.edit = function(req, res, next) {
+  DataSet.findById(req.params.id, (err, dataset) => {
+    res.render('dashboard/dataset/edit', { dataset: dataset });
+  }); 
 }
 
 exports.delete = function(req, res, next) {

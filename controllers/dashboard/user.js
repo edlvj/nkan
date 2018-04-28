@@ -17,7 +17,7 @@ exports.new = function(req, res, next) {
 exports.create = function(req, res, next) { 
   var newUser = new User(req.body);
   
-  newUser.password =  newUser.generateHash(newUser.password);
+  //newUser.password =  newUser.generateHash(newUser.password);
   newUser.save((err, user) => {
     if(err) {
       res.render('dashboard/user/new', {
@@ -47,9 +47,10 @@ exports.update = function(req, res, next) {
 
     var newUser = Object.assign(user, req.body);
 
-    if(req.body.password)
-      newUser.password = newUser.generateHash(req.body.password);
-
+    //if(req.body.password)
+     // newUser.password = 
+    
+    //password
     newUser.save((err, user) => {
       req.flash('success', req.t('dashboard.flash.updated'));
       res.redirect('/dashboard/user');

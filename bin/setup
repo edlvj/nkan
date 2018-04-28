@@ -88,9 +88,8 @@ const setupConfig = [
     message: 'Enter connection url for MongoDb(127.0.0.1/nkan):',
     validate: function(value) {
       let done = this.async();
-      let dbUrl = 'mongodb://' + value;
-
-      let db = mongoose.connect(dbUrl).then(conn => {
+      
+      setConnection(value).then(conn => {
         if(conn) {
           conn.disconnect();
           done(null, true);
@@ -99,42 +98,54 @@ const setupConfig = [
       .catch(err=> {
         if(err) {
           done('Wrong connection url. Try another');
-          return false;
         }
       });
-    }
+    },
+    default: function() {
+      return '127.0.0.1/nkan';
+    }  
   }
 ];
 
-const setup = async() => {
-  const configData = await inquirer.prompt(setupConfig);
-  saveConfig(configData);
-  
-  const adminData = await inquirer.prompt(setupAdmin);
-  saveAdmin(adminData);
+const setConnection = function(url) {
+  let dbUrl = 'mongodb://' + url;
+  return mongoose.connect(dbUrl);
 }
 
 const toConfig = function(data) {
-  data.template = 'basic';
   delete data.env;
+  data.template = 'basic';
   return 'module.exports = ' + JSON.stringify(data);
 }  
 
-const saveConfig = function(data) {
+const writeConfigFile = function(data) {
   let fileName = './config/' + data.env + '.js';
   return fs.writeFileSync(fileName, toConfig(data));
 }
 
-const saveAdmin = function(user) {
-  var newAdmin = new User(user);
-  
-  newAdmin.password = newAdmin.generateHash(newAdmin.password);
+const saveAdminUser = async(userData, dbUrl) => {
+  let conn = setConnection(dbUrl);
+
+  var newAdmin = new User(userData);
   newAdmin.admin = true;
-  newAdmin.save((err, user) => {
-    if(!err) {
-      console.log('Succesfully installed.');
-    } 
-  });
+
+  try {
+    await newAdmin.save();
+    await mongoose.connection.close();
+  } catch(e) {
+    console.log(e.message);
+  }
+
+  return true;
+}
+
+const setup = async() => {
+  const configData = await inquirer.prompt(setupConfig);
+  writeConfigFile(configData);
+  
+  const adminData = await inquirer.prompt(setupAdmin);
+  //connection problem
+  saveAdminUser(adminData, configData.db);
 }
 
 setup();

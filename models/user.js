@@ -32,7 +32,17 @@ var UserSchema = new mongoose.Schema({
   timestamps: true
 });
 
-UserSchema.methods.generateHash = function(password) {
+UserSchema.pre('save', function (next) {
+  var user = this;
+
+  if (!user.isModified('password'))
+    return next();
+  
+  user.password = generateHash(user.password);
+  next();
+});
+
+var generateHash = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 

@@ -34,8 +34,8 @@ describe('Dataset', function() {
   });
 
   it('find a dataSet by title', function(done) {
-    DataSet.findOne({ title: 'lorem' }, function(err, page) {
-      page.title.should.eql('lorem');
+    DataSet.findOne({ title: 'lorem' }, function(err, dataset) {
+      dataset.title.should.eql('lorem');
       done();
     });
   });

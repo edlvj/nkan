@@ -10,8 +10,6 @@ var mongoose = require('mongoose');
 var i18n = require('i18next');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-var multer  = require('multer');
-var upload = multer({ dest: 'uploads/' })
 
 var User = require('./models/user');
 //middlewares
@@ -34,8 +32,8 @@ switch (process.env.NODE_ENV) {
     var config = require('./config/dev');
 }
 
-mongoose.connect(config.db, function(err) {
-  if (err) {
+mongoose.connect('mongodb://' + config.db, function(err) {
+  if(err) {
     console.error('connect to %s error: ', config.db, err.message);
     process.exit(1);
   }

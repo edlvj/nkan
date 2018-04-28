@@ -1,20 +1,20 @@
 extends ../layout
 block title
-  title New page
+  title= t('dashboard.new')
 
 block content
   ol.breadcrumb
-    li.active New Page
+    li.active= t('dashboard.new')
   include ../_error.pug  
   
   form(role='form', action="/dashboard/page", method="post")
     .form-group
-      label(for="page_title") Title
+      label(for="page_title")= t('dashboard.form.title')
       input.form-control(type='text', name="title", id="page_title", required="")
     .form-group
-      label(for="page_slug") Slug
+      label(for="page_slug")= t('dashboard.form.slug')
       input.form-control(type='text', name="slug", id="page_slug", required="")    
     .form-group
-      label(for="page_body") Body
+      label(for="page_body")= t('dashboard.form.body')
       textarea.form-control(name="body", id="page_body", required="")
     button.btn.btn-default(type='submit') Submit

@@ -1,18 +1,22 @@
 extends ../layout
 block title
-  title Datasets New
+  title= t('dashboard.new')
 
 block content
   ol.breadcrumb
-    li.active New Dataset
+    li.active= t('dashboard.new')
+  include ../_error.pug  
 
-  form(role='form', action="/dashboard/dataset", method="post")
+  form(role='form', action="/dashboard/dataset", method="post" enctype="multipart/form-data")
     .form-group
       label(for="dataset_title") Title
       input.form-control(type='text', name="title" id="dataset_title")
     .form-group
       label(for="dataset_description") Description
-      textarea.form-control(type='text', name="url" id="dataset_description")
+      textarea.form-control(type='text', name="description" id="dataset_description")
+    .form-group
+      label(for="dataset_slug")= t('dashboard.form.slug')
+      input.form-control(type='text', name="slug" id="dataset_slug", required="")
     .form-group
       label(for="dataset_category") Category
       select.form-control(type='text', name="categories[]" id="dataset_category" multiple)
@@ -31,7 +35,6 @@ block content
 
     .form-group
       label(for="dataset_title") Files
-      input.form-control(type='file', name="files[]" id="dataset_files" multiple)
+      input.form-control(type='file' name="files" id="dataset_files" multiple)
 
-      
     button.btn.btn-default(type='submit') Submit

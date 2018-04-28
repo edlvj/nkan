@@ -1,5 +1,6 @@
 var express = require('express');
 
+var { categories } = require('../../middlewares');
 var dashboard = require('../../controllers/dashboard');
 
 var dataset = require('../../controllers/dashboard/dataset');
@@ -48,13 +49,13 @@ router.route('/user/:id')
 // datasets
 router.route('/dataset')
   .get(dataset.index)
-  .post(dataset.create);
+  .post(categories, dataset.uploadFiles, dataset.create);
 
-router.get('/dataset/new', dataset.new);
+router.get('/dataset/new', categories, dataset.new);
 
 router.route('/dataset/:id')
-  .get(dataset.edit)
-  .put(dataset.update)
+  .get(categories, dataset.edit)
+  .put(categories, dataset.update)
   .delete(dataset.delete);
 
 //dashboard

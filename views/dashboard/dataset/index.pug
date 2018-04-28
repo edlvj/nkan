@@ -1,6 +1,6 @@
 extends ../layout
 block title
-  title Datasets
+  title= t('dashboard.navbar.datasets')
 
 block head_scripts
   include ./../_header.pug
@@ -10,7 +10,7 @@ block content
   .card.mb-3
     .card-header
       i.fa.fa-table
-        = t('dashboard.navbar.categories')
+        = t('dashboard.navbar.datasets')
     .card-body
       .table-responsive
         table#dataTable.table.table-bordered(width='100%', cellspacing='0')
@@ -18,18 +18,29 @@ block content
             tr
               th Title
               th License
-              th Category
+              th Categories
+              th Status
+              th Files
               th Manage
+
           tbody
             each dataset in datasets
               tr
                 td= dataset.title
-                td= dataset.license
-                td= dataset.category
+                td= dataset.licenseType().title
+                td= dataset.categories
+                td= dataset.statusType().title
+                td files list
                 td
-                  a(href='/dashboard/dataset/' + dataset.id) Edit 
-                  span |
-                  a(href='/dashboard/dataset/' + dataset.id)  Delete
+                  div(style="display: -webkit-box;")
+                    a(href='/dashboard/dataset/' + dataset.id) 
+                      button.btn
+                        = t('dashboard.edit')
+                  span
+                  form(method="post" action='/dashboard/dataset/' + dataset.id)
+                    input(type="hidden" name="_method" value="DELETE")
+                    button.btn.btn-danger(type='submit')
+                      = t('dashboard.delete')
 
 block footer_scripts
   include ./../_footer.pug
