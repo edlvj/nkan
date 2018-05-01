@@ -7,8 +7,11 @@ block content
         h1.my-4 DataSets
         each dataset in datasets
           include _dataset
-
-        include _pagination
+        
+        if datasets.length > 0
+          include _pagination
+        else
+          h3 No datasets  
       .col-md-4
         .card.my-4
           include ../layout/_search

@@ -14,7 +14,7 @@ exports.new = function(req, res, next) {
   res.render('dashboard/user/new');
 }
 
-exports.create = function(req, res, next) { 
+exports.create = function(req, res, next) {
   var newUser = new User(req.body);
   
   //newUser.password =  newUser.generateHash(newUser.password);

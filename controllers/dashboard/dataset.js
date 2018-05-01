@@ -3,7 +3,6 @@ var upload = multer({ dest: 'uploads/' });
 
 var DataSet = require('../../models/dataset');
 var Category = require('../../models/dataset/category');
-var File = require('../../models/dataset/file');
 
 var licences = require('../../models/dataset/license');
 var statuses = require('../../models/dataset/status');
@@ -11,10 +10,13 @@ var statuses = require('../../models/dataset/status');
 exports.uploadFiles = upload.array('files', 3);
 
 exports.index = function(req, res, next) {
-  DataSet.find({}).exec((err, datasets) => {
-    res.render('dashboard/dataset', {
-      datasets: datasets
-    });
+  DataSet.find({})
+    .populate('categories')
+    .populate('files')
+    .exec((err, datasets) => {
+      res.render('dashboard/dataset', {
+        datasets: datasets
+      });
   });
 }
 
@@ -30,50 +32,43 @@ exports.create = function(req, res, next) {
   let newDataSet = new DataSet(req.body);
   newDataSet.user = req.user;
 
-  console.log(req.body);
-  console.log(req.user);
-  console.log(req.files);
+  newDataSet.saveFiles(req.files).then(data => {
+    newDataSet.files = data.map(function(file) {
+      return file._id;
+    });
 
-  newDataSet.save((err, dataset) => {
-    console.log(err);
-    console.log(dataset);
-    if(err) {
-      res.render('dashboard/dataset/new', {
-        categories: res.locals.categories,
-        licences: [],
-        statuses: [],
-        err: err
-      });
-    } else {
-      
-
-      req.files.forEach(function(file) {
-        let datasetFile = new File({
-          name: file.originalname,
-          path: file.path,
-          mime_type: file.mimetype,
-          dataset: dataset.id
+    newDataSet.save((err, dataset) => {
+      if(err) {
+        res.render('dashboard/dataset/new', {
+          categories: res.locals.categories,
+          licences: [],
+          statuses: [],
+          err: err
         });
-
-        datasetFile.save();
-      });
-      req.flash('success', req.t('dashboard.flash.created'));
-      res.redirect('/dashboard/dataset');
-    }
+      } else { 
+        req.flash('success', req.t('dashboard.flash.created'));
+        res.redirect('/dashboard/dataset');
+      }
+    });
+  }).catch(err =>{
+    req.flash('error', err.message);
   });
 }
 
 exports.edit = function(req, res, next) {
   DataSet.findById(req.params.id, (err, dataset) => {
-    res.render('dashboard/dataset/edit', { dataset: dataset });
-  }); 
+    res.render('dashboard/dataset/edit', { 
+      dataset: dataset,
+      licences: licences,
+      statuses: statuses 
+    });
+  }).populate('files'); 
 }
 
 exports.delete = function(req, res, next) {
 	DataSet.findById(req.params.id, (err, page) => {
-
-    DataSet.remove({_id : req.params.id}, (err, result) => {
-      req.flash('success', 'DataSet destroyed.');
+    DataSet.remove({_id: req.params.id}, (err, dataset) => {
+      req.flash('success', req.t('dashboard.flash.deleted'));
       res.redirect('back');
     });
   });
@@ -81,12 +76,11 @@ exports.delete = function(req, res, next) {
 
 exports.update = function(req, res, next) {
   DataSet.findById({_id: req.params.id}, (err, dataset) => {
-
     Object.assign(dataset, req.body).save((err, dataset) => {
       if(err) {
         req.flash('warning', 'Something went wrong.');
       }
-      req.flash('success', 'Dataset updated.');
+      req.flash('success', req.t('dashboard.flash.updated'));
       res.redirect('/dashboard/category');
     }); 
   });

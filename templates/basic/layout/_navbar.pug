@@ -6,5 +6,8 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
       span.navbar-toggler-icon
     #navbarResponsive.collapse.navbar-collapse
       ul.navbar-nav.ml-auto
-        li.nav-item
-          a.nav-link(href="/page/about") About
+        each page in pages
+          li.nav-item
+            a.nav-link(href="/page/" + page.slug)= page.title
+
+        

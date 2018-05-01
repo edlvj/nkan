@@ -24,10 +24,11 @@ var CategorySchema = new Schema({
     required: true,
     validate: stringRangeValidator
   }
-},
-{
-  timestamps: true
-});
+  },
+  {
+    timestamps: true
+  }
+);
 
 CategorySchema.plugin(uniqueValidator);
 module.exports = mongoose.model('Category', CategorySchema);

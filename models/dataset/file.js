@@ -12,14 +12,8 @@ var FileSchema = new Schema({
     unique: true
   },
   mime_type: {
-    type: String,
-    unique: true
-  },
-  dataset: {
-    type: String,
-    required: true,
-    ref: 'Dataset'
-  },
+    type: String
+  }
 });
 
 FileSchema.plugin(uniqueValidator);

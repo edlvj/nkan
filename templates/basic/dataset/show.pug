@@ -4,9 +4,9 @@ block content
   .container
     .row
       .col-md-8
-        h1.my-4 Data Set
+        h1.my-4= dataset.title
         h3 Description
-        p dedskldgkfdgkflgkfdlgkfdlgfdlgkl
+        p= dataset.description
 
         h3 Info
         .table-responsive
@@ -14,21 +14,22 @@ block content
             thead
               tr
                 th(scope='row') Identifation number
-                td Otto
+                td= dataset.id
             tbody
               tr
-                th(scope='row') formats
-                td Otto
+                th(scope='row') License
+                td
+                  a(href= dataset.licenseType().url)= dataset.licenseType().title
               tr
-                th(scope='row') license
-                td Thornton
+                th(scope='row') Added at
+                td= dataset.createdAt.toDateString()
               tr
-                th(scope='row') added by
-                td Thornton
+                th(scope='row') Updated at
+                td= dataset.updatedAt.toDateString()
 
         h3 Download
-        
-        button.btn CSV
+        each file in dataset.files
+          a.btn(href=file.path)= file.mime_type
 
       .col-md-4
         .card.my-4

@@ -2,5 +2,5 @@
   .card-body
     h2.card-title= dataset.title
     p.card-text= dataset.description
-    a.btn.btn-primary(href="") Read More
+    a.btn.btn-primary(href="/dataset/" + dataset.slug) Read More
   .card-footer.text-muted= dataset.createdAt.toDateString()

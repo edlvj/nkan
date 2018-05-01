@@ -1,8 +1,16 @@
 var Category = require('../models/dataset/category');
+var Page = require('../models/page');
 
 var categories = function(req, res, next) {
   Category.find({}).exec((err, categories) => {
     res.locals.categories = categories;
+    next();
+  });
+};
+
+var pages = function(req, res, next) {
+  Page.find({}).exec((err, pages) => {
+    res.locals.pages = pages;
     next();
   });
 };
@@ -25,6 +33,7 @@ var ensureNotLogged = function(req, res, next) {
 
 module.exports = { 
   categories,
+  pages,
   ensureLogged,
   ensureNotLogged
 }

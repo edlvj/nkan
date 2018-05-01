@@ -13,7 +13,7 @@ var LocalStrategy = require('passport-local').Strategy;
 
 var User = require('./models/user');
 //middlewares
-var { ensureLogged, categories } = require('./middlewares');
+var { ensureLogged, categories, pages } = require('./middlewares');
 //routes
 var indexRoute = require('./routes/index');
 var authRoute = require('./routes/dashboard/auth');
@@ -103,7 +103,7 @@ passport.deserializeUser((id, done) => {
       console.log(`Error: ${error}`);
     });
 });
-
+app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname ,'/node_modules/jquery/dist')));
 app.use(express.static(path.join(__dirname ,'/node_modules/bootstrap/dist')));
@@ -121,8 +121,9 @@ app.use(function(req, res, next){
   next();
 });
 
-app.use('/', categories, indexRoute);
-app.use('/dashboard', ensureLogged, dashboardRoute);
+app.use('/', categories, pages, indexRoute);
+///app.use('/dashboard', ensureLogged, dashboardRoute);
+app.use('/dashboard', dashboardRoute);
 app.use('/auth', authRoute);
 
 app.use(function(req, res, next) {

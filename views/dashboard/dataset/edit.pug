@@ -1,28 +1,43 @@
 extends ../layout
 block title
-  title Datasets New
+  title= t('dashboard.edit')
 
 block content
   ol.breadcrumb
-    li.active New Dataset
+    li.active= t('dashboard.edit')
+  include ../_error.pug
 
-  form(role='form', action="/dashboard/dataset", method="post")
-    .form-group
+  form(role='form', action="/dashboard/dataset/" + dataset.id, method="post")
+    form-group
       label(for="dataset_title") Title
-      input.form-control(type='text', name="title" id="dataset_title")
+      input.form-control(type='text', name="title" id="dataset_title" value=dataset.title)
     .form-group
       label(for="dataset_description") Description
-      textarea.form-control(type='text', name="url" id="dataset_description")
+      textarea.form-control(type='text', name="description" id="dataset_description")=dataset.description
     .form-group
-      label(for="dataset_license") License
-      select.form-control(type='text', name="url" id="dataset_license")
-        option 1
-        option 2
+      label(for="dataset_slug")= t('dashboard.form.slug')
+      input.form-control(type='text', name="slug" id="dataset_slug", required="" value=dataset.slug)
     .form-group
       label(for="dataset_category") Category
-      select.form-control(type='text', name="url" id="dataset_category")
-        option 1
-        option 2
+      select.form-control(type='text', name="categories[]" id="dataset_category" multiple)
+        each category in categories
+          option(value=category.id, selected=dataset.categories.includes(category.id))= category.title
+    .form-group
+      label(for="dataset_status") Status
+      select.form-control(type='text', name="status" id="dataset_status")
+        each status in statuses
+          option(value=status.id, selected= status.id == dataset.status)= status.title
+    .form-group
+      label(for="dataset_license") License
+      select.form-control(type='text', name="license" id="dataset_license")
+        each license in licences
+          option(value=license.id, selected= license.id == dataset.license)= license.title 
+    .form-group
+      label(for="dataset_files") Files
+      input.form-control(type='file' name="files" id="dataset_files" multiple)
 
-    p datafiels
+    ul.list-group
+      each file in dataset.files
+        li.list-group-item.list-group-item-info=file.name    
+
     button.btn.btn-default(type='submit') Submit

@@ -19,18 +19,21 @@ block content
               th Title
               th License
               th Categories
-              th Status
               th Files
+              th Status
               th Manage
-
           tbody
             each dataset in datasets
               tr
                 td= dataset.title
                 td= dataset.licenseType().title
-                td= dataset.categories
+                td
+                  each category in dataset.categories
+                    = category.title
+                td 
+                  each file in dataset.files
+                    a(href='/' + file.path)= file.name
                 td= dataset.statusType().title
-                td files list
                 td
                   div(style="display: -webkit-box;")
                     a(href='/dashboard/dataset/' + dataset.id) 
