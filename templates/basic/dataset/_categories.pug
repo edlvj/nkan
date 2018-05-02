@@ -5,7 +5,7 @@ h5.card-header= t('app.categories')
       ul.list-unstyled.mb-0
         each category in categories
           li
-            a(href="/?category=" + category.slug) 
+            a(href="?category=" + category.id) 
               = category.title
     .col-lg-6
       ul.list-unstyled.mb-0

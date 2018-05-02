@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var licences = require('./dataset/license');
 var statuses = require('./dataset/status');
-var File = require('./dataset/file')
+var File = require('./dataset/file');
+
 var Schema = mongoose.Schema;
 
 var DataSetSchema = new Schema({
@@ -46,6 +47,27 @@ var DataSetSchema = new Schema({
 {
   timestamps: true
 });
+
+DataSetSchema.statics.findArhived = function() {
+  return this.find({ status: 1 });
+}
+
+DataSetSchema.statics.findActive = function() {
+  return this.find({ status: 2 });
+}
+
+DataSetSchema.query.search = function(query) {
+  return this.where('title', new RegExp(query, 'i'))
+  // return this.find({ $or: [{ 
+  //   title: { $regex: new RegExp(query, "i")}, 
+  //   description: { $regex: new RegExp(query, "i") }
+  //   }] 
+  // });
+}
+
+DataSetSchema.query.byCategory = function(id) {
+  return this.where({categories: [id]});
+}
 
 DataSetSchema.post('remove', function(next) {
   this.files.forEach(function(item) {

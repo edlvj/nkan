@@ -23,12 +23,23 @@ var CategorySchema = new Schema({
     unique: true,
     required: true,
     validate: stringRangeValidator
-  }
-  },
+  }},
   {
     timestamps: true
   }
 );
+
+CategorySchema.statics.findBySlug = function(slug) {
+  return new Promise(function(resolve, reject) {
+    this.findOne({
+      slug: slug
+    })
+    .exec(function(err, category) {
+      if (err) reject(err);
+      resolve(category);
+    });
+  }.bind(this));
+}
 
 CategorySchema.plugin(uniqueValidator);
 module.exports = mongoose.model('Category', CategorySchema);

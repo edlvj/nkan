@@ -1,4 +1,5 @@
 footer.py-2.bg-dark
   .container
-    p.m-0.text-center.text-white 
-      = app.site_name  + " 2018"
+    p.m-0.text-center.text-white
+      - var year = (new Date()).getFullYear();
+      = app.site_name  +' '+ year

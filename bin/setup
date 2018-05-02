@@ -43,6 +43,17 @@ const setupAdmin = [
 const setupConfig = [
   {
     type: 'list',
+    name: 'lang',
+    message: 'What language your want use?',
+    choices: [],
+    default: fiunction() {
+      
+    }
+
+
+  },
+  {
+    type: 'list',
     name: 'env',
     message: 'What enviroment you want install?',
     choices: [

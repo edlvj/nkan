@@ -18,6 +18,7 @@ var { ensureLogged, categories, pages } = require('./middlewares');
 var indexRoute = require('./routes/index');
 var authRoute = require('./routes/dashboard/auth');
 var dashboardRoute = require('./routes/dashboard/index');
+var apiRoute = require('./routes/api/index');
 
 var app = express();
 
@@ -125,6 +126,7 @@ app.use('/', categories, pages, indexRoute);
 ///app.use('/dashboard', ensureLogged, dashboardRoute);
 app.use('/dashboard', dashboardRoute);
 app.use('/auth', authRoute);
+app.use('/api', apiRoute);
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
