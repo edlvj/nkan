@@ -1,9 +1,7 @@
 NKAN
 
 A backend-free open data portal, powered by Node.js
-
 Please note this is still a work in progress!
-
 
 Features
 
@@ -13,11 +11,9 @@ Tempales
 
 Localizations
 
-
 - UA
 Відкрита Система керування вмістом для створення порталу Відкритих данних
-
-Особливості
+Можливості
 
 Встановлення через CLI
 
