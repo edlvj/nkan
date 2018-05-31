@@ -41,11 +41,14 @@ mongoose.connect('mongodb://' + config.db, function(err) {
 });
 
 i18n.init({
-    lng: 'ua',
-    fallbackNS: 'en-US',
-    ignoreRoutes: ['public/'],
-    useCookie: false,
-    debug: true
+  fallbackLng: 'uk-UA',
+  ignoreRoutes: ['public/'],
+  useCookie: false,
+  debug: true,
+  load: 'current',
+  detectLngFromPath: false,
+  detectLngFromHeaders: false,
+  forceDetectLngFromPath: false
 });
 
 app.use(methodOverride('X-HTTP-Method-Override'));

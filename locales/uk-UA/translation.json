@@ -1,0 +1,45 @@
+{
+    "dashboard": {
+        "panel": "Nkan Панель",
+        "navbar": {
+            "dashboard": "Панель",
+            "datasets": "Набори даних",
+            "categories": "Категорії",
+            "pages": "Сторінки",
+            "users": "Користувачі",
+            "list": "Список",
+            "new": "Новий"
+        },
+        "auth": {
+            "login": "Вхід",
+            "logout": "Вихід",
+            "email": "Email",
+            "password": "Пароль"
+        },
+        "form": {
+            "title": "Заголовок",
+            "slug": "url",
+            "body": "Текст",
+            "submit": "Зберегти"
+        },
+        "manage": "Управление",
+        "edit": "Правка",
+        "new": "Новий",
+        "delete": "Удалить"
+    },
+    "app": {
+        "datasets": "Набори данних",
+        "search": "Пошук",
+        "categories": "Категории",
+        "pagination": {
+            "first": "перша",
+            "last": "остання"
+        },
+        "read_more": "Переглянути"
+    },
+    "flash":{
+        "created": "Успішно своренно.",
+        "updated": "Успішно обновленно.",
+        "deleted": "Успішно видаленно."
+    }
+}

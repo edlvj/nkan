@@ -42,6 +42,6 @@ const datasetScope = function(query) {
     scope = scope.byCategory(query.category);
   }
 
-  console.log(scope.schema);
+//  console.log(scope.schema);
   return scope;
 }

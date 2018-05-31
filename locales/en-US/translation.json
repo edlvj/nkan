@@ -1,0 +1,44 @@
+{
+    "dashboard": {
+        "panel": "Nkan Panel",
+        "navbar": {
+            "dashboard": "Dashboard",
+            "datasets": "Data Sets",
+            "categories": "Categories",
+            "pages": "Pages",
+            "users": "Users",
+            "list": "List",
+            "new": "New"
+        },
+        "auth": {
+            "login": "Login",
+            "logout": "Logout",
+            "email": "Email",
+            "password": "Password"
+        },
+        "form": {
+            "title": "Title",
+            "slug": "Slug",
+            "body": "Body",
+            "submit": "Submit"
+        },
+        "flash":{
+            "created": "Successfully created.",
+            "updated": "Successfully updated.",
+            "deleted": "Successfully deleted."
+        },
+        "manage": "Manage",
+        "edit": "Edit",
+        "new": "New",
+        "delete": "Delete"
+
+    },
+    "app": {
+        "search": "Search",
+        "categories": "Categories",
+        "pagination": {
+            "older": "Older",
+            "newer": "Newer"
+        }
+    }
+}

@@ -1,10 +1,10 @@
 ul.pagination.justify-content-center.mb-4
   if current == 1
     li.page-item.disabled
-      a.page-link First
+      a.page-link= t('app.pagination.first')
   else    
     li.page-item
-      a.page-link(href='/?page=1') First
+      a.page-link(href='/?page=1')= t('app.pagination.first')
   - var i = (Number(current) > 5 ? Number(current) - 4 : 1)
   if i !== 1
     li.page-item.disabled
@@ -21,7 +21,7 @@ ul.pagination.justify-content-center.mb-4
           a.page-link ...
   if current == pages
     li.disabled
-      a.page-link Last       
+      a.page-link= t('app.pagination.last')      
   else
     li
-      a.page-link(href="/?page=" + pages) Last
+      a.page-link(href="/?page=" + pages)= t('app.pagination.last')

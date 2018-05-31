@@ -1,1 +1,1 @@
-module.exports = {"site_name":"test","description":"test","db":"127.0.0.1/nkan","template":"basic", "lang": "ua"}
+module.exports = {"site_name":"test","description":"test","db":"127.0.0.1/nkan","template":"basic", "lang": "uk"}
