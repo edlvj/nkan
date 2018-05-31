@@ -12,6 +12,7 @@ exports.index = function(req, res, next) {
 
 exports.new = function(req, res, next) {
   let category = new Category();
+  
   res.render('dashboard/category/new', { 
     category: category 
   });

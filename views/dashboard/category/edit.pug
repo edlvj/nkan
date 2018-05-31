@@ -14,11 +14,11 @@ block content
     input(type="hidden" name="_method" value="PUT")
     .form-group
       label(for="category_title")
-        = t('dashboard.form.title')
+        = t('dashboard.category.title')
       input.form-control(type='text', name="title" id="category_title", required="", value=category.title)
     .form-group
       label(for="category_slug")
-        = t('dashboard.form.slug')
+        = t('dashboard.category.slug')
       input.form-control(type='text', name="slug" id="category_slug", required="", value=category.slug)
     button.btn.btn-default(type='submit')
       = t('dashboard.form.submit')

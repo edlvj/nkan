@@ -19,7 +19,7 @@ block content
             tr
               th Email
               th Admin
-              th Manage
+              th= t('dashboard.manage')
           tbody
             each user in users
               tr
@@ -28,11 +28,11 @@ block content
                 td 
                   div(style="display: -webkit-box;")
                     a(href='/dashboard/user/' + user.id) 
-                      button.btn Edit 
+                      button.btn= t('dashboard.edit')
                     span 
                     form(method="post" action='/dashboard/user/' + user.id)
                       input(type="hidden" name="_method" value="DELETE")
-                      button.btn.btn-danger(type='submit') Delete 
+                      button.btn.btn-danger(type='submit')= t('dashboard.delete')
 
 block footer_scripts
   include ./../_footer.pug

@@ -13,11 +13,11 @@ block content
       label(for="user_email") Email
       input.form-control(type='email', name="email", id="user_email", required="", value=user.email)
     .form-group
-      label(for="user_password") Password
+      label(for="user_password")= t('dashboard.user.password')
       input.form-control(type='text', name="password", id="user_password")
     .form-group
       .form-check
         input#adminCheck.form-check-input(type="checkbox", name="admin", value="true")
         label.form-check-label(for="adminCheck")
           | Admin
-    button.btn.btn-default(type='submit') Submit
+    button.btn.btn-default(type='submit')= t('dashboard.form.submit')

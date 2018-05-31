@@ -17,25 +17,54 @@
             "password": "Пароль"
         },
         "form": {
-            "title": "Заголовок",
-            "slug": "url",
             "body": "Текст",
             "submit": "Зберегти"
         },
-        "manage": "Управление",
-        "edit": "Правка",
-        "new": "Новий",
-        "delete": "Удалить"
+        "dataset": {
+            "title": "Назва",
+            "description": "Опис",
+            "slug": "URL",
+            "categories": "Категорії",
+            "status": "Статус",
+            "license": "Ліцензія",
+            "files": "Файли" 
+        },
+        "category": {
+            "title": "Назва",
+            "slug": "URL"
+        },
+        "page": {
+            "title": "Назва",
+            "slug": "URL",
+            "body": "Вміст"
+        },
+        "user": {
+            "password": "Пароль"
+        },
+        "manage": "Управління",
+        "edit": "Редагувати",
+        "new": "Додати",
+        "delete": "Видалити",
+        "view_all": "Переглянути всі"
     },
     "app": {
-        "datasets": "Набори данних",
+        "datasets": "Набори даних",
         "search": "Пошук",
-        "categories": "Категории",
+        "categories": "Категорії",
         "pagination": {
             "first": "перша",
             "last": "остання"
         },
-        "read_more": "Переглянути"
+        "read_more": "Переглянути",
+        "dataset": {
+            "description": "Опис",
+            "info": "Информація",
+            "identifation_number": "Індіфікаційний номер",
+            "license": "Ліцензія",
+            "added_at": "Доданно в",
+            "updated_at": "Обновленно в",
+            "download": "Завантаження"
+        }
     },
     "flash":{
         "created": "Успішно своренно.",

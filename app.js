@@ -26,7 +26,7 @@ switch (process.env.NODE_ENV) {
   case 'test':
     var config = require('./config/test')
     break;
-  case 'prod':
+  case 'production':
     var config = require('./config/production')
     break;  
   default:

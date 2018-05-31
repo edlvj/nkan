@@ -9,32 +9,32 @@ block content
 
   form(role='form', action="/dashboard/dataset", method="post" enctype="multipart/form-data")
     .form-group
-      label(for="dataset_title") Title
+      label(for="dataset_title")= t('dashboard.dataset.title')
       input.form-control(type='text', name="title" id="dataset_title")
     .form-group
-      label(for="dataset_description") Description
+      label(for="dataset_description")= t('dashboard.dataset.description')
       textarea.form-control(type='text', name="description" id="dataset_description")
     .form-group
-      label(for="dataset_slug")= t('dashboard.form.slug')
+      label(for="dataset_slug")= t('dashboard.dataset.slug')
       input.form-control(type='text', name="slug" id="dataset_slug", required="")
     .form-group
-      label(for="dataset_category") Category
+      label(for="dataset_category")= t('dashboard.dataset.categories')
       select.form-control(type='text', name="categories[]" id="dataset_category" multiple)
         each category in categories
           option(value=category.id)= category.title
     .form-group
-      label(for="dataset_status") Status
+      label(for="dataset_status")= t('dashboard.dataset.status')
       select.form-control(type='text', name="status" id="dataset_status")
         each status in statuses
           option(value=status.id)= status.title  
     .form-group
-      label(for="dataset_license") License
+      label(for="dataset_license")= t('dashboard.dataset.license')
       select.form-control(type='text', name="license" id="dataset_license")
         each license in licences
           option(value=license.id)= license.title 
 
     .form-group
-      label(for="dataset_files") Files
+      label(for="dataset_files")= t('dashboard.dataset.files')
       input.form-control(type='file' name="files" id="dataset_files" multiple)
 
-    button.btn.btn-default(type='submit') Submit
+    button.btn.btn-default(type='submit')= t('dashboard.form.submit')

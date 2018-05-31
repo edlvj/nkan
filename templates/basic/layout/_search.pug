@@ -2,6 +2,6 @@ h5.card-header= t('app.search')
 .card-body
   form(action="/", method="GET")
     .input-group
-      input.form-control(type="text" placeholder="Search for..." name="search")
+      input.form-control(type="text" name="search")
       span.input-group-btn
-        button.btn.btn-secondary(type="submit") Search
+        button.btn.btn-secondary(type="submit")= t('app.search')

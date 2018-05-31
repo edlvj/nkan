@@ -5,29 +5,29 @@ block content
     .row
       .col-md-8
         h1.my-4= dataset.title
-        h3 Description
+        h3= t('app.dataset.description')
         p= dataset.description
 
-        h3 Info
+        h3= t('app.dataset.info')
         .table-responsive
           table.table
             thead
               tr
-                th(scope='row') Identifation number
+                th(scope='row')= t('app.dataset.identifation_number')
                 td= dataset.id
             tbody
               tr
-                th(scope='row') License
+                th(scope='row')= t('app.dataset.license')
                 td
                   a(href= dataset.licenseType().url)= dataset.licenseType().title
               tr
-                th(scope='row') Added at
+                th(scope='row')= t('app.dataset.added_at')
                 td= dataset.createdAt.toDateString()
               tr
-                th(scope='row') Updated at
+                th(scope='row')= t('app.dataset.updated_at')
                 td= dataset.updatedAt.toDateString()
 
-        h3 Download
+        h3= t('app.dataset.download')
         each file in dataset.files
           a.btn(href=file.path)= file.mime_type
 

@@ -30,12 +30,14 @@
         "manage": "Manage",
         "edit": "Edit",
         "new": "New",
-        "delete": "Delete"
+        "delete": "Delete",
+        "view_all": "View All"
 
     },
     "app": {
         "search": "Search",
         "categories": "Categories",
+        "datasets": "Datasets",
         "pagination": {
             "older": "Older",
             "newer": "Newer"

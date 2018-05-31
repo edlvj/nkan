@@ -8,9 +8,8 @@ block content
           .card-body-icon
             i.fa.fa-fw.fa-list
           .mr-5
-            = count 
-            Datasets
+            = count +' '+ t('dashboard.navbar.datasets')
         a.card-footer.text-white.clearfix.small.z-1(href='/dashboard/dataset')
-          span.float-left View all
+          span.float-left= t('dashboard.view_all')
           span.float-right
             i.fa.fa-angle-right

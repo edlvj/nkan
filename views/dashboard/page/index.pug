@@ -17,9 +17,9 @@ block content
         table#dataTable.table.table-bordered(width='100%', cellspacing='0')
           thead
             tr
-              th Title
-              th Slug
-              th Manage
+              th= t('dashboard.page.title')
+              th= t('dashboard.page.slug')
+              th= t('dashboard.manage')
           tbody
             each page in pages
               tr
@@ -28,13 +28,11 @@ block content
                 td 
                   div(style="display: -webkit-box;")
                     a(href='/dashboard/page/' + page.id) 
-                      button.btn
-                        = t('dashboard.edit')
+                      button.btn= t('dashboard.edit')
                     span 
                     form(method="post" action='/dashboard/page/' + page.id)
                       input(type="hidden" name="_method" value="DELETE")
-                      button.btn.btn-danger(type='submit')
-                        = t('dashboard.delete')
+                      button.btn.btn-danger(type='submit')= t('dashboard.delete')
 
 block footer_scripts
   include ./../_footer.pug

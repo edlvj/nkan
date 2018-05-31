@@ -16,12 +16,12 @@ block content
         table#dataTable.table.table-bordered(width='100%', cellspacing='0')
           thead
             tr
-              th Title
-              th License
-              th Categories
-              th Files
-              th Status
-              th Manage
+              th= t('dashboard.dataset.title')
+              th= t('dashboard.dataset.license')
+              th= t('dashboard.dataset.categories')
+              th= t('dashboard.dataset.files')
+              th= t('dashboard.dataset.status')
+              th= t('dashboard.manage')
           tbody
             each dataset in datasets
               tr

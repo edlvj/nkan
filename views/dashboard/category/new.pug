@@ -12,11 +12,11 @@ block content
   form(role='form', action="/dashboard/category", method="post")
     .form-group
       label(for="category_title")
-        = t('dashboard.form.title')
+        = t('dashboard.category.title')
       input.form-control(type='text', name="title" id="category_title", required="")
     .form-group
       label(for="category_slug")
-        = t('dashboard.form.slug')
+        = t('dashboard.category.slug')
       input.form-control(type='text', name="slug" id="category_slug", required="")
     button.btn.btn-default(type='submit')
       = t('dashboard.form.submit')
